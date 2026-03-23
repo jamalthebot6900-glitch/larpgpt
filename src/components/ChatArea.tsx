@@ -29,6 +29,9 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Suppress unused var warning
+  void onBack;
+
   useEffect(() => {
     if (!selectedScene) {
       setMessages([]);
@@ -57,10 +60,12 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
   }, [selectedScene]);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({
-      top: scrollRef.current.scrollHeight,
-      behavior: "smooth",
-    });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [messages, generating]);
 
   const handleGenerate = async (base64: string) => {
@@ -141,15 +146,17 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
 
   return (
     <>
+      {/* Messages area */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
         <div className="flex flex-col">
           {messages.map((msg, i) => (
             <div
               key={i}
-              className="py-6 flex gap-4 max-w-[680px] w-full mx-auto px-5"
+              className="py-5 md:py-6 flex gap-3 md:gap-4 max-w-[680px] w-full mx-auto px-4 md:px-5 animate-fadeIn"
             >
+              {/* Avatar */}
               <div
-                className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-base"
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full shrink-0 flex items-center justify-center text-sm md:text-base"
                 style={{
                   background:
                     msg.role === "user"
@@ -159,26 +166,29 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
               >
                 {msg.role === "user" ? "🧑" : "🎭"}
               </div>
-              <div className="flex-1 text-[15px] leading-relaxed">
+
+              {/* Content */}
+              <div className="flex-1 text-[14px] md:text-[15px] leading-relaxed min-w-0">
                 {msg.text.split("\n").map((line, j) => (
-                  <p key={j} className="mb-3">
+                  <p key={j} className={line ? "mb-2.5" : "mb-1"}>
                     {line}
                   </p>
                 ))}
 
                 {msg.showUpload && (
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <button
                       onClick={() => setShowUpload(true)}
-                      className="py-2.5 px-5 rounded-lg text-sm font-medium cursor-pointer border-none transition-colors"
+                      className="py-2.5 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border-none transition-all duration-150"
                       style={{ background: "var(--green)", color: "white" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.background =
-                          "var(--green-hover)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.background = "var(--green)")
-                      }
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "var(--green-hover)";
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "var(--green)";
+                        e.currentTarget.style.transform = "translateY(0)";
+                      }}
                     >
                       📸 Upload Selfie
                     </button>
@@ -198,30 +208,27 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
 
           {/* Typing/generating indicator */}
           {generating && (
-            <div className="py-6 flex gap-4 max-w-[680px] w-full mx-auto px-5">
+            <div className="py-5 md:py-6 flex gap-3 md:gap-4 max-w-[680px] w-full mx-auto px-4 md:px-5 animate-fadeIn">
               <div
-                className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-base"
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full shrink-0 flex items-center justify-center text-sm md:text-base"
                 style={{ background: "var(--green)" }}
               >
                 🎭
               </div>
               <div className="flex-1">
-                <div className="flex gap-1 py-2">
-                  {[0, 1, 2].map((i) => (
+                <div className="flex gap-1.5 py-2">
+                  {[0, 1, 2].map((dotIdx) => (
                     <span
-                      key={i}
-                      className="w-2 h-2 rounded-full"
+                      key={dotIdx}
+                      className="w-2 h-2 rounded-full inline-block"
                       style={{
                         background: "var(--text-muted)",
-                        animation: `typingBounce 1.4s infinite ease-in-out ${i * 0.2}s`,
+                        animation: `typingBounce 1.4s infinite ease-in-out ${dotIdx * 0.2}s`,
                       }}
                     />
                   ))}
                 </div>
-                <div
-                  className="text-xs mt-1"
-                  style={{ color: "var(--text-muted)" }}
-                >
+                <div className="text-[12px] mt-1" style={{ color: "var(--text-muted)" }}>
                   {genStep}
                 </div>
               </div>
@@ -231,7 +238,7 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
       </div>
 
       {/* Input area */}
-      <div className="px-5 pb-6 pt-4 flex justify-center">
+      <div className="px-4 md:px-5 pb-4 md:pb-6 pt-3 flex justify-center shrink-0">
         <div className="max-w-[680px] w-full">
           <div className="relative">
             <textarea
@@ -250,33 +257,24 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border)",
                 color: "var(--text-primary)",
+                minHeight: "52px",
               }}
-              onFocus={(e) =>
-                (e.currentTarget.style.borderColor = "var(--green)")
-              }
-              onBlur={(e) =>
-                (e.currentTarget.style.borderColor = "var(--border)")
-              }
+              onFocus={(e) => (e.currentTarget.style.borderColor = "var(--green)")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
             />
             <button
               onClick={handleSend}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-[34px] h-[34px] rounded-lg border-none cursor-pointer flex items-center justify-center transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-[34px] h-[34px] rounded-lg border-none cursor-pointer flex items-center justify-center transition-colors duration-150"
               style={{ background: "var(--green)", color: "white" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--green-hover)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "var(--green)")}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
               </svg>
             </button>
           </div>
-          <div
-            className="text-center text-[11px] mt-2"
-            style={{ color: "var(--text-muted)" }}
-          >
+          <div className="text-center text-[11px] mt-2" style={{ color: "var(--text-muted)" }}>
             LarpGPT can generate convincing larps. Use responsibly. Or don&apos;t. 🎭
           </div>
         </div>
@@ -287,21 +285,6 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
         onClose={() => setShowUpload(false)}
         onGenerate={handleGenerate}
       />
-
-      <style jsx global>{`
-        @keyframes typingBounce {
-          0%,
-          80%,
-          100% {
-            transform: scale(0.6);
-            opacity: 0.4;
-          }
-          40% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </>
   );
 }

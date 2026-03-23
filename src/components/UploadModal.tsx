@@ -8,11 +8,7 @@ interface UploadModalProps {
   onGenerate: (base64: string) => void;
 }
 
-export default function UploadModal({
-  isOpen,
-  onClose,
-  onGenerate,
-}: UploadModalProps) {
+export default function UploadModal({ isOpen, onClose, onGenerate }: UploadModalProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -34,43 +30,54 @@ export default function UploadModal({
     [handleFile]
   );
 
+  const resetAndClose = useCallback(() => {
+    setPreview(null);
+    setDragging(false);
+    if (fileRef.current) fileRef.current.value = "";
+    onClose();
+  }, [onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center"
-      style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }}
-      onClick={onClose}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)" }}
+      onClick={resetAndClose}
     >
       <div
-        className="rounded-2xl p-8 max-w-[440px] w-[90%] text-center relative"
+        className="rounded-2xl p-6 md:p-8 max-w-[420px] w-full text-center relative animate-fadeIn"
         style={{
           background: "var(--bg-secondary)",
           border: "1px solid var(--border)",
+          boxShadow: "0 24px 48px rgba(0,0,0,0.4)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
-          className="absolute top-3 right-4 text-xl bg-transparent border-none cursor-pointer"
+          onClick={resetAndClose}
+          className="absolute top-3 right-4 text-xl bg-transparent border-none cursor-pointer transition-colors duration-150"
           style={{ color: "var(--text-muted)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
         >
           ✕
         </button>
 
-        <h2 className="text-xl font-bold mb-2">Upload Your Selfie</h2>
-        <p className="text-[13px] mb-6" style={{ color: "var(--text-muted)" }}>
+        <h2 className="text-lg md:text-xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>
+          Upload Your Selfie
+        </h2>
+        <p className="text-[13px] mb-5" style={{ color: "var(--text-muted)" }}>
           We&apos;ll put your face in the scene. The more ridiculous, the better.
         </p>
 
         {!preview ? (
           <div
-            className={`rounded-xl p-10 cursor-pointer transition-all mb-4 ${
-              dragging ? "scale-[1.02]" : ""
-            }`}
+            className="rounded-xl p-8 md:p-10 cursor-pointer transition-all duration-200 mb-4"
             style={{
               border: `2px dashed ${dragging ? "var(--green)" : "var(--border)"}`,
               background: dragging ? "var(--green-glow)" : "transparent",
+              transform: dragging ? "scale(1.02)" : "scale(1)",
             }}
             onClick={() => fileRef.current?.click()}
             onDragOver={(e) => {
@@ -80,25 +87,27 @@ export default function UploadModal({
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
           >
-            <div className="text-[40px] mb-3">📸</div>
-            <div className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            <div className="text-[36px] mb-3">📸</div>
+            <div className="text-[14px] font-medium" style={{ color: "var(--text-secondary)" }}>
               Click to upload or drag & drop
             </div>
-            <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+            <div className="text-[12px] mt-1.5" style={{ color: "var(--text-muted)" }}>
               PNG, JPG up to 10MB
             </div>
           </div>
         ) : (
-          <div className="mb-4">
+          <div className="mb-5">
             <img
               src={preview}
-              alt="Preview"
-              className="max-w-[200px] max-h-[200px] rounded-lg mx-auto"
+              alt="Your selfie preview"
+              className="max-w-[180px] max-h-[180px] rounded-lg mx-auto object-cover"
               style={{ border: "2px solid var(--green)" }}
             />
             <button
-              className="mt-3 text-xs cursor-pointer bg-transparent border-none"
+              className="mt-3 text-[12px] cursor-pointer bg-transparent border-none transition-colors duration-150 block mx-auto"
               style={{ color: "var(--text-muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               onClick={() => {
                 setPreview(null);
                 if (fileRef.current) fileRef.current.value = "";
@@ -122,15 +131,21 @@ export default function UploadModal({
 
         {preview && (
           <button
-            onClick={() => onGenerate(preview)}
-            className="w-full py-3 rounded-xl text-[15px] font-semibold cursor-pointer border-none transition-colors"
+            onClick={() => {
+              onGenerate(preview);
+              setPreview(null);
+              if (fileRef.current) fileRef.current.value = "";
+            }}
+            className="w-full py-3 rounded-xl text-[15px] font-semibold cursor-pointer border-none transition-all duration-150"
             style={{ background: "var(--green)", color: "white" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--green-hover)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "var(--green)")
-            }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--green-hover)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "var(--green)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
           >
             🎭 Generate My Larp
           </button>

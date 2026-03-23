@@ -27,16 +27,16 @@ const fakeHistory = {
 export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
   return (
     <>
-      {/* Overlay for mobile */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={onClose}
-        />
-      )}
+      {/* Backdrop overlay for mobile */}
+      <div
+        className={`fixed inset-0 bg-black/60 z-40 md:hidden transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+      />
 
       <aside
-        className={`fixed left-0 top-0 w-[260px] h-screen flex flex-col z-50 border-r transition-transform duration-300 md:translate-x-0 ${
+        className={`fixed left-0 top-0 w-[260px] h-screen flex flex-col z-50 border-r transition-transform duration-300 ease-out md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{
@@ -45,30 +45,19 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
         }}
       >
         {/* Header */}
-        <div className="p-3" style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="p-3 shrink-0" style={{ borderBottom: "1px solid var(--border)" }}>
           <button
             onClick={onNewChat}
-            className="w-full py-2.5 px-3 rounded-lg text-sm flex items-center gap-2 transition-colors"
+            className="w-full py-2.5 px-3 rounded-lg text-[13px] flex items-center gap-2 transition-colors duration-150 cursor-pointer"
             style={{
               border: "1px solid var(--border)",
               color: "var(--text-primary)",
               background: "transparent",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--bg-hover)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "transparent")
-            }
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
@@ -81,23 +70,33 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
           {Object.entries(fakeHistory).map(([section, items]) => (
             <div key={section}>
               <div
-                className="px-3 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider"
+                className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wider select-none"
                 style={{ color: "var(--text-muted)" }}
               >
                 {section}
               </div>
-              {items.map((item) => (
+              {items.map((item, i) => (
                 <div
                   key={item}
-                  className="px-3 py-2.5 rounded-lg text-[13px] cursor-pointer truncate transition-colors"
-                  style={{ color: "var(--text-secondary)" }}
+                  className={`px-3 py-2.5 rounded-lg text-[13px] cursor-pointer truncate transition-colors duration-150 ${
+                    i === 0 && section === "Today" ? "" : ""
+                  }`}
+                  style={{
+                    color: i === 0 && section === "Today" ? "var(--text-primary)" : "var(--text-secondary)",
+                    background: i === 0 && section === "Today" ? "var(--bg-hover)" : "transparent",
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "var(--bg-hover)";
                     e.currentTarget.style.color = "var(--text-primary)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--text-secondary)";
+                    if (i === 0 && section === "Today") {
+                      e.currentTarget.style.background = "var(--bg-hover)";
+                      e.currentTarget.style.color = "var(--text-primary)";
+                    } else {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.color = "var(--text-secondary)";
+                    }
                   }}
                 >
                   {item}
@@ -108,26 +107,20 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
         </div>
 
         {/* Footer */}
-        <div className="p-3" style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="p-3 shrink-0" style={{ borderTop: "1px solid var(--border)" }}>
           <div
-            className="flex items-center gap-2.5 p-2 rounded-lg cursor-pointer transition-colors"
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--bg-hover)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "transparent")
-            }
+            className="flex items-center gap-2.5 p-2 rounded-lg cursor-pointer transition-colors duration-150"
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
-              style={{
-                background: "linear-gradient(135deg, var(--green), #0ea5e9)",
-              }}
+              style={{ background: "linear-gradient(135deg, var(--green), #0ea5e9)" }}
             >
               🎭
             </div>
             <div>
-              <div className="text-[13px]" style={{ color: "var(--text-primary)" }}>
+              <div className="text-[13px] font-medium" style={{ color: "var(--text-primary)" }}>
                 Larper Pro
               </div>
               <div className="text-[11px]" style={{ color: "var(--text-muted)" }}>

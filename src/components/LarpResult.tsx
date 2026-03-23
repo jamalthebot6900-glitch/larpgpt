@@ -1,7 +1,7 @@
 "use client";
 
 import { Scene } from "@/lib/scenes";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 interface LarpResultProps {
   scene: Scene;
@@ -9,7 +9,51 @@ interface LarpResultProps {
   demo: boolean;
 }
 
+function ActionButton({
+  children,
+  primary,
+  onClick,
+}: {
+  children: React.ReactNode;
+  primary?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="py-2 px-3.5 rounded-lg text-[12px] font-medium cursor-pointer transition-all duration-150 border-none"
+      style={{
+        background: primary ? "var(--green)" : "transparent",
+        color: primary ? "white" : "var(--text-secondary)",
+        border: primary ? "none" : "1px solid var(--border)",
+      }}
+      onMouseEnter={(e) => {
+        if (primary) {
+          e.currentTarget.style.background = "var(--green-hover)";
+        } else {
+          e.currentTarget.style.borderColor = "var(--green)";
+          e.currentTarget.style.color = "var(--green)";
+        }
+        e.currentTarget.style.transform = "translateY(-1px)";
+      }}
+      onMouseLeave={(e) => {
+        if (primary) {
+          e.currentTarget.style.background = "var(--green)";
+        } else {
+          e.currentTarget.style.borderColor = "var(--border)";
+          e.currentTarget.style.color = "var(--text-secondary)";
+        }
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
+  const [copied, setCopied] = useState(false);
+
   const handleDownload = useCallback(async () => {
     if (!imageUrl) return;
     try {
@@ -27,19 +71,21 @@ export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
   }, [imageUrl, scene.id]);
 
   const handleCopy = useCallback(async () => {
-    if (!imageUrl) return;
-    try {
-      const res = await fetch(imageUrl);
-      const blob = await res.blob();
-      await navigator.clipboard.write([
-        new ClipboardItem({ [blob.type]: blob }),
-      ]);
-      alert("Image copied to clipboard! 📋");
-    } catch {
-      // Fallback: copy caption
-      navigator.clipboard.writeText(`${scene.caption}\n\n${scene.hashtags}`);
-      alert("Caption copied to clipboard! 📋");
+    if (imageUrl) {
+      try {
+        const res = await fetch(imageUrl);
+        const blob = await res.blob();
+        await navigator.clipboard.write([
+          new ClipboardItem({ [blob.type]: blob }),
+        ]);
+      } catch {
+        await navigator.clipboard.writeText(`${scene.caption}\n\n${scene.hashtags}`);
+      }
+    } else {
+      await navigator.clipboard.writeText(`${scene.caption}\n\n${scene.hashtags}`);
     }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }, [imageUrl, scene]);
 
   const handleShareX = useCallback(() => {
@@ -49,29 +95,26 @@ export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
     window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
   }, [scene]);
 
-  const handleShareIG = useCallback(() => {
-    if (imageUrl) {
-      // Copy image + caption for IG
-      navigator.clipboard.writeText(`${scene.caption}\n\n${scene.hashtags}`);
-      alert(
-        "Caption copied! Download the image and paste the caption on Instagram 📱"
-      );
-    }
-  }, [imageUrl, scene]);
+  const handleShareIG = useCallback(async () => {
+    await navigator.clipboard.writeText(`${scene.caption}\n\n${scene.hashtags}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [scene]);
 
   return (
     <div
-      className="mt-4 rounded-xl overflow-hidden"
+      className="mt-4 rounded-xl overflow-hidden animate-fadeIn"
       style={{
         border: "1px solid var(--border)",
         background: "var(--bg-secondary)",
       }}
     >
-      {/* Image */}
+      {/* Image / Placeholder */}
       <div
-        className="w-full aspect-square flex items-center justify-center relative overflow-hidden"
+        className="w-full flex items-center justify-center relative overflow-hidden"
         style={{
           background: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
+          aspectRatio: "1",
         }}
       >
         {imageUrl && !demo ? (
@@ -81,12 +124,9 @@ export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-center px-10">
-            <div className="text-[80px] mb-4" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{scene.emoji}</div>
-            <h3
-              className="text-lg font-bold mb-2"
-              style={{ color: "var(--gold)" }}
-            >
+          <div className="text-center px-8">
+            <div className="text-7xl mb-4">{scene.emoji}</div>
+            <h3 className="text-lg font-bold mb-2" style={{ color: "var(--gold)" }}>
               {scene.title}
             </h3>
             <p className="text-[13px]" style={{ color: "var(--text-muted)" }}>
@@ -100,109 +140,44 @@ export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
 
       {/* Caption */}
       <div className="px-4 py-3">
-        <p className="text-sm leading-relaxed mb-3">{scene.caption}</p>
-        <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+        <p className="text-[14px] leading-relaxed mb-2">{scene.caption}</p>
+        <p className="text-[12px]" style={{ color: "var(--text-muted)" }}>
           {scene.hashtags}
         </p>
       </div>
 
       {/* Stats */}
       <div
-        className="px-4 py-3 flex gap-4 text-xs"
-        style={{ color: "var(--text-muted)" }}
+        className="px-4 py-2.5 flex flex-wrap gap-4 text-[12px]"
+        style={{ color: "var(--text-muted)", borderTop: "1px solid var(--border)" }}
       >
         <span>
           💰 Net Worth:{" "}
-          <span style={{ color: "var(--gold)", fontWeight: 600 }}>
-            {scene.stats.netWorth}
-          </span>
+          <span style={{ color: "var(--gold)", fontWeight: 600 }}>{scene.stats.netWorth}</span>
         </span>
         <span>
           👥 Followers:{" "}
-          <span style={{ color: "var(--gold)", fontWeight: 600 }}>
-            {scene.stats.followers}
-          </span>
+          <span style={{ color: "var(--gold)", fontWeight: 600 }}>{scene.stats.followers}</span>
         </span>
         <span>
           🎭 Larp Level:{" "}
-          <span style={{ color: "var(--gold)", fontWeight: 600 }}>
-            {scene.stats.larpLevel}
-          </span>
+          <span style={{ color: "var(--gold)", fontWeight: 600 }}>{scene.stats.larpLevel}</span>
         </span>
       </div>
 
-      {/* Action buttons */}
-      <div className="px-4 pb-3 flex flex-wrap gap-2">
-        <button
-          onClick={handleDownload}
-          className="py-1.5 px-3.5 rounded-md text-xs cursor-pointer transition-colors border-none font-medium"
-          style={{ background: "var(--green)", color: "white" }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.background = "var(--green-hover)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.background = "var(--green)")
-          }
-        >
+      {/* Actions */}
+      <div
+        className="px-4 py-3 flex flex-wrap gap-2"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
+        <ActionButton primary onClick={handleDownload}>
           ⬇️ Download
-        </button>
-        <button
-          onClick={handleCopy}
-          className="py-1.5 px-3.5 rounded-md text-xs cursor-pointer transition-colors"
-          style={{
-            border: "1px solid var(--border)",
-            background: "transparent",
-            color: "var(--text-secondary)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--green)";
-            e.currentTarget.style.color = "var(--green)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "var(--border)";
-            e.currentTarget.style.color = "var(--text-secondary)";
-          }}
-        >
-          📋 Copy Image
-        </button>
-        <button
-          onClick={handleShareX}
-          className="py-1.5 px-3.5 rounded-md text-xs cursor-pointer transition-colors"
-          style={{
-            border: "1px solid var(--border)",
-            background: "transparent",
-            color: "var(--text-secondary)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--green)";
-            e.currentTarget.style.color = "var(--green)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "var(--border)";
-            e.currentTarget.style.color = "var(--text-secondary)";
-          }}
-        >
-          🐦 Share to X
-        </button>
-        <button
-          onClick={handleShareIG}
-          className="py-1.5 px-3.5 rounded-md text-xs cursor-pointer transition-colors"
-          style={{
-            border: "1px solid var(--border)",
-            background: "transparent",
-            color: "var(--text-secondary)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--green)";
-            e.currentTarget.style.color = "var(--green)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "var(--border)";
-            e.currentTarget.style.color = "var(--text-secondary)";
-          }}
-        >
-          📱 Share to IG
-        </button>
+        </ActionButton>
+        <ActionButton onClick={handleCopy}>
+          {copied ? "✅ Copied!" : "📋 Copy"}
+        </ActionButton>
+        <ActionButton onClick={handleShareX}>🐦 Share to X</ActionButton>
+        <ActionButton onClick={handleShareIG}>📱 Share to IG</ActionButton>
       </div>
     </div>
   );
