@@ -22,7 +22,7 @@ export default function LarpOfTheDay() {
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <span
-          className="text-[11px] font-bold uppercase tracking-wider"
+          className="text-[11px] font-bold uppercase"
           style={{ color: "var(--gold)" }}
         >
           🏆 Larp of the Day

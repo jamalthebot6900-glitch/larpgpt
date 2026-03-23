@@ -70,7 +70,7 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
           {Object.entries(fakeHistory).map(([section, items]) => (
             <div key={section}>
               <div
-                className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wider select-none"
+                className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase select-none"
                 style={{ color: "var(--text-muted)" }}
               >
                 {section}
