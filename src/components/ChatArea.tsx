@@ -232,45 +232,47 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
 
       {/* Input area */}
       <div className="px-5 pb-6 pt-4 flex justify-center">
-        <div className="max-w-[680px] w-full relative">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
+        <div className="max-w-[680px] w-full">
+          <div className="relative">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
+              placeholder="Describe your larp... or pick a scene above"
+              rows={1}
+              className="w-full py-3.5 pl-4 pr-14 rounded-xl text-[15px] outline-none resize-none"
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border)",
+                color: "var(--text-primary)",
+              }}
+              onFocus={(e) =>
+                (e.currentTarget.style.borderColor = "var(--green)")
               }
-            }}
-            placeholder="Describe your larp... or pick a scene above"
-            rows={1}
-            className="w-full py-3.5 pl-4 pr-13 rounded-xl text-[15px] outline-none resize-none"
-            style={{
-              background: "var(--bg-secondary)",
-              border: "1px solid var(--border)",
-              color: "var(--text-primary)",
-            }}
-            onFocus={(e) =>
-              (e.currentTarget.style.borderColor = "var(--green)")
-            }
-            onBlur={(e) =>
-              (e.currentTarget.style.borderColor = "var(--border)")
-            }
-          />
-          <button
-            onClick={handleSend}
-            className="absolute right-2.5 bottom-2.5 w-[34px] h-[34px] rounded-lg border-none cursor-pointer flex items-center justify-center transition-colors"
-            style={{ background: "var(--green)", color: "white" }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="currentColor"
+              onBlur={(e) =>
+                (e.currentTarget.style.borderColor = "var(--border)")
+              }
+            />
+            <button
+              onClick={handleSend}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-[34px] h-[34px] rounded-lg border-none cursor-pointer flex items-center justify-center transition-colors"
+              style={{ background: "var(--green)", color: "white" }}
             >
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-            </svg>
-          </button>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+              </svg>
+            </button>
+          </div>
           <div
             className="text-center text-[11px] mt-2"
             style={{ color: "var(--text-muted)" }}

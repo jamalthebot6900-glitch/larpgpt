@@ -82,7 +82,7 @@ export default function LarpResult({ scene, imageUrl, demo }: LarpResultProps) {
           />
         ) : (
           <div className="text-center px-10">
-            <div className="text-[80px] mb-4">{scene.emoji}</div>
+            <div className="text-[80px] mb-4" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{scene.emoji}</div>
             <h3
               className="text-lg font-bold mb-2"
               style={{ color: "var(--gold)" }}

@@ -29,7 +29,7 @@ export default function LarpOfTheDay() {
         }}
       >
         <div className="text-center px-8">
-          <div className="text-7xl mb-4">{scene.emoji}</div>
+          <div className="text-7xl mb-4" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{scene.emoji}</div>
           <h3 className="text-lg font-bold mb-1" style={{ color: "var(--gold)" }}>
             {scene.title}
           </h3>

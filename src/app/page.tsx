@@ -73,7 +73,7 @@ export default function Home() {
         ) : (
           <div className="flex-1 overflow-y-auto">
             <div className="flex flex-col items-center justify-center py-10 px-5 min-h-full">
-              <div className="text-5xl mb-4">🎭</div>
+              <div className="text-5xl mb-4" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>🎭</div>
               <h1 className="text-[28px] font-bold mb-2">LarpGPT</h1>
               <p
                 className="text-[15px] mb-8"

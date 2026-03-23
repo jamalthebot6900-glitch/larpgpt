@@ -105,7 +105,7 @@ export default function GalleryPage() {
                 }}
               >
                 <div className="text-center">
-                  <div className="text-6xl mb-3">{scene.emoji}</div>
+                  <div className="text-6xl mb-3" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{scene.emoji}</div>
                   <div
                     className="text-sm font-semibold"
                     style={{ color: "var(--gold)" }}

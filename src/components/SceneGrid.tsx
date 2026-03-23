@@ -29,7 +29,7 @@ export default function SceneGrid({ onSelectScene }: SceneGridProps) {
             e.currentTarget.style.boxShadow = "none";
           }}
         >
-          <div className="text-[28px] mb-2">{scene.emoji}</div>
+          <div className="text-[28px] mb-2" style={{ fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{scene.emoji}</div>
           <div className="text-sm font-semibold mb-1" style={{ color: "var(--text-primary)" }}>
             {scene.title}
           </div>
