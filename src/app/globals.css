@@ -42,6 +42,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variant-emoji: emoji;
+  font-optical-sizing: none;
+  font-feature-settings: 'kern' 0;
+  text-rendering: geometricPrecision;
 }
 
 /* Scrollbar */
