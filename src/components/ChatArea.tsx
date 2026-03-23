@@ -240,7 +240,7 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
       {/* Input area */}
       <div className="px-4 md:px-5 pb-4 md:pb-6 pt-3 flex justify-center shrink-0">
         <div className="max-w-[680px] w-full">
-          <div className="relative">
+          <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -252,20 +252,39 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
               }}
               placeholder="Describe your larp... or pick a scene above"
               rows={1}
-              className="w-full py-3.5 pl-4 pr-14 rounded-xl text-[15px] outline-none resize-none"
               style={{
+                width: "100%",
+                padding: "14px 56px 14px 16px",
+                borderRadius: "12px",
+                fontSize: "15px",
+                outline: "none",
+                resize: "none",
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border)",
                 color: "var(--text-primary)",
                 minHeight: "52px",
+                fontFamily: "inherit",
               }}
               onFocus={(e) => (e.currentTarget.style.borderColor = "var(--green)")}
               onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
             />
             <button
               onClick={handleSend}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-[34px] h-[34px] rounded-lg border-none cursor-pointer flex items-center justify-center transition-colors duration-150"
-              style={{ background: "var(--green)", color: "white" }}
+              style={{
+                position: "absolute",
+                right: "10px",
+                width: "34px",
+                height: "34px",
+                borderRadius: "8px",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "var(--green)",
+                color: "white",
+                transition: "background 0.15s",
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "var(--green-hover)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "var(--green)")}
             >

@@ -16,7 +16,12 @@
   --gold-glow: rgba(245, 197, 66, 0.2);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: normal !important;
+}
 
 html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -24,11 +29,18 @@ html, body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: normal;
 }
 
 /* Force ALL emojis to render in color across all platforms */
 body {
   font-variant-emoji: emoji;
+}
+
+/* Tailwind v4 reset override — prevent unwanted tracking */
+h1, h2, h3, h4, h5, h6, p, span, div, button, a, textarea, input, label {
+  letter-spacing: normal !important;
+  font-variant-numeric: normal;
 }
 
 /* Scrollbar */
