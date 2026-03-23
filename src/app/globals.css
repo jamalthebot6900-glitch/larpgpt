@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --tracking-tight: 0;
-  --tracking-normal: 0;
-  --tracking-wide: 0;
-  --tracking-wider: 0;
-  --tracking-widest: 0;
+  --tracking-tight: 0em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0em;
+  --tracking-wider: 0em;
+  --tracking-widest: 0em;
 }
 
 :root {
@@ -24,22 +24,24 @@
   --gold-glow: rgba(245, 197, 66, 0.2);
 }
 
-@layer base {
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    letter-spacing: 0 !important;
-  }
+/* MUST be outside @layer to override Tailwind's base reset */
+*, *::before, *::after,
+html, body, div, span, p, h1, h2, h3, h4, h5, h6,
+a, button, input, textarea, select, label, li, ul, ol,
+aside, section, article, nav, header, footer, main {
+  letter-spacing: 0em !important;
+  word-spacing: 0em !important;
+}
 
-  html, body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-variant-emoji: emoji;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-emoji: emoji;
 }
 
 /* Scrollbar */
