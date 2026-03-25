@@ -36,6 +36,16 @@ const showcaseItems = [
   { image: "/showcase/dubai_penthouse.jpg" },
   { image: "/showcase/lambo2.jpg" },
   { image: "/showcase/yacht3.jpg" },
+  { image: "/showcase/counting_cash.jpg" },
+  { image: "/showcase/gucci_walk.jpg" },
+  { image: "/showcase/miami_hottub.jpg" },
+  { image: "/showcase/gwagon_gas.jpg" },
+  { image: "/showcase/bali_pool.jpg" },
+  { image: "/showcase/lv_nyc.jpg" },
+  { image: "/showcase/blackjack.jpg" },
+  { image: "/showcase/jetski.jpg" },
+  { image: "/showcase/maybach_night.jpg" },
+  { image: "/showcase/monaco_balcony.jpg" },
 ];
 
 export default function Showcase() {

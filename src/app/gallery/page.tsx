@@ -45,6 +45,22 @@ const galleryItems = [
   { image: "/showcase/maldives_boat.jpg", title: "Maldives Speedboat", category: "Travel", handle: "@alxcooks" },
   { image: "/showcase/michelin_dinner.jpg", title: "Michelin Dinner", category: "Lifestyle", handle: "@pr6spr" },
   { image: "/showcase/tokyo_neon.jpg", title: "Tokyo Neon", category: "Travel", handle: "@elonmusk" },
+  { image: "/showcase/counting_cash.jpg", title: "Counting Cash", category: "Lifestyle", handle: "@VitalikButerin" },
+  { image: "/showcase/gucci_walk.jpg", title: "Gucci Walk", category: "Lifestyle", handle: "@alxcooks" },
+  { image: "/showcase/miami_hottub.jpg", title: "Miami Hot Tub", category: "Night", handle: "@BenArmstrongsX" },
+  { image: "/showcase/gwagon_gas.jpg", title: "G-Wagon Gas Station", category: "Cars", handle: "@saylor" },
+  { image: "/showcase/bali_pool.jpg", title: "Bali Villa Pool", category: "Travel", handle: "@Megga" },
+  { image: "/showcase/lv_nyc.jpg", title: "LV Fifth Avenue", category: "Lifestyle", handle: "@toly" },
+  { image: "/showcase/blackjack.jpg", title: "High Stakes Blackjack", category: "Night", handle: "@flipski77" },
+  { image: "/showcase/jetski.jpg", title: "Maldives Jet Ski", category: "Travel", handle: "@ethanprosper" },
+  { image: "/showcase/maybach_night.jpg", title: "Maybach Night", category: "Cars", handle: "@blknoiz06" },
+  { image: "/showcase/monaco_balcony.jpg", title: "Monaco Balcony", category: "Travel", handle: "@elonmusk" },
+  { image: "/showcase/dubai_pool_party.jpg", title: "Dubai Pool Party", category: "Night", handle: "@VitalikButerin" },
+  { image: "/showcase/barber_crypto.jpg", title: "Barber Crypto", category: "Lifestyle", handle: "@saylor" },
+  { image: "/showcase/jet_redcarpet.jpg", title: "Jet Red Carpet", category: "Travel", handle: "@blknoiz06" },
+  { image: "/showcase/mclaren_night.jpg", title: "McLaren Night", category: "Cars", handle: "@flipski77" },
+  { image: "/showcase/strip_rain.jpg", title: "Strip Rain", category: "Night", handle: "@toly" },
+  { image: "/showcase/urus_sunset.jpg", title: "Urus Sunset", category: "Cars", handle: "@ethanprosper" },
 ];
 
 export default function GalleryPage() {
