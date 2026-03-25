@@ -195,7 +195,7 @@ export default function Home() {
                   className="text-[14px] md:text-[15px] mb-6 animate-fadeIn"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  Upload a face. Pick a scene. Fake a lifestyle. No one will know.
+                  fake it till you make it, literally...
                 </p>
 
                 <Showcase />
