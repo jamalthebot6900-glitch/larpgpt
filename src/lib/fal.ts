@@ -1,7 +1,7 @@
 const FAL_KEY = process.env.FAL_KEY;
 
 const REALISM_PREFIX =
-  "Using this exact person's face with perfect identity preservation — create an ultra-photorealistic photograph: ";
+  "Using this exact person's face with perfect identity preservation. Match their gender, ethnicity and appearance precisely. Create an ultra-photorealistic photograph: ";
 
 const REALISM_SUFFIX =
   " Shot on a Canon EOS R5 with an 85mm f/1.4 lens at ISO 200. " +

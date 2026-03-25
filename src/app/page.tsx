@@ -58,42 +58,98 @@ export default function Home() {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col h-screen md:ml-[260px]">
-        {/* Top bar */}
+        {/* Top nav bar */}
         <div
-          className="px-4 md:px-5 py-3 flex items-center justify-between shrink-0"
+          className="px-3 md:px-5 py-2.5 flex items-center justify-between shrink-0"
           style={{ borderBottom: "1px solid var(--border)" }}
         >
-          <button
-            className="md:hidden w-9 h-9 rounded-lg border-none flex items-center justify-center text-lg cursor-pointer"
-            style={{ background: "transparent", color: "var(--text-primary)" }}
-            onClick={() => setSidebarOpen(true)}
-            aria-label="Open menu"
-          >
-            ☰
-          </button>
-          {/* Spacer for desktop so model selector stays centered */}
-          <div className="hidden md:block w-[80px]" />
-          <button
-            className="flex items-center gap-1.5 py-1.5 px-3 rounded-lg border-none text-sm font-semibold cursor-pointer transition-colors duration-150"
-            style={{ background: "transparent", color: "var(--text-primary)" }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-          >
-            🎭 LarpGPT-4o
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--text-muted)"
-              strokeWidth="2"
+          {/* Left: hamburger (mobile) + logo */}
+          <div className="flex items-center gap-2">
+            <button
+              className="md:hidden w-9 h-9 rounded-lg border-none flex items-center justify-center text-lg cursor-pointer"
+              style={{ background: "transparent", color: "var(--text-primary)" }}
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open menu"
             >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </button>
+              ☰
+            </button>
+            <span className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
+              🎭 LarpGPT
+            </span>
+          </div>
+
+          {/* Center: coin buttons */}
+          <div className="flex items-center gap-1.5">
+            <a
+              href="https://x.com/larpgpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 py-1.5 px-2.5 rounded-lg text-[12px] font-semibold no-underline transition-all duration-150"
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border)",
+                color: "var(--text-secondary)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--green)";
+                e.currentTarget.style.color = "var(--text-primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.color = "var(--text-secondary)";
+              }}
+            >
+              𝕏
+            </a>
+            <a
+              href="https://pump.fun/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 py-1.5 px-2.5 rounded-lg text-[12px] font-semibold no-underline transition-all duration-150"
+              style={{
+                background: "var(--green)",
+                border: "1px solid var(--green)",
+                color: "white",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--green-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "var(--green)";
+              }}
+            >
+              Buy
+            </a>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText("CONTRACT_ADDRESS_HERE");
+                const btn = document.getElementById("ca-btn");
+                if (btn) { btn.textContent = "Copied!"; setTimeout(() => { btn.textContent = "CA"; }, 1500); }
+              }}
+              id="ca-btn"
+              className="flex items-center gap-1 py-1.5 px-2.5 rounded-lg text-[12px] font-semibold cursor-pointer transition-all duration-150"
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border)",
+                color: "var(--text-secondary)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--green)";
+                e.currentTarget.style.color = "var(--text-primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.color = "var(--text-secondary)";
+              }}
+            >
+              CA
+            </button>
+          </div>
+
+          {/* Right: gallery link */}
           <Link
             href="/gallery"
-            className="text-xs py-1.5 px-3 rounded-lg transition-colors duration-150 no-underline"
+            className="text-[12px] py-1.5 px-2.5 rounded-lg transition-colors duration-150 no-underline"
             style={{
               color: "var(--text-secondary)",
               border: "1px solid var(--border)",

@@ -9,49 +9,49 @@ const examples = [
     emoji: "🛥️",
     label: "Yacht Party",
     prompt:
-      "This man is shirtless lounging on the aft deck of a 60-meter superyacht in the Mediterranean. Crystal blue water, golden hour sunlight, champagne on the table, beautiful people in the background. Paparazzi-style candid shot.",
+      "This person is lounging on the aft deck of a 60-meter superyacht in the Mediterranean. Crystal blue water, golden hour sunlight, champagne on the table, beautiful people in the background. Paparazzi-style candid shot.",
   },
   {
     emoji: "🏎️",
     label: "Lambo & Mansion",
     prompt:
-      "This man is standing confidently next to a matte black Lamborghini Urus in the driveway of a modern $15 million mansion with palm trees and a fountain. Golden hour warm lighting, shallow depth of field.",
+      "This person is standing confidently next to a matte black Lamborghini Urus in the driveway of a modern $15 million mansion with palm trees and a fountain. Golden hour warm lighting, shallow depth of field.",
   },
   {
     emoji: "📈",
     label: "100x Trading Desk",
     prompt:
-      "This man is sitting at a professional trading desk with 6 curved monitors all showing green candlestick charts and massive crypto gains. Dark room lit only by screen glow, energy drinks on desk, confident smirk.",
+      "This person is sitting at a professional trading desk with 6 curved monitors all showing green candlestick charts and massive crypto gains. Dark room lit only by screen glow, energy drinks on desk, confident smirk.",
   },
   {
     emoji: "✈️",
     label: "Private Jet",
     prompt:
-      "This man is relaxing inside a luxurious private jet cabin, cream leather seats, champagne glass in hand, window showing clouds and sunset. Warm cabin lighting, casually dressed in designer clothes.",
+      "This person is relaxing inside a luxurious private jet cabin, cream leather seats, champagne glass in hand, window showing clouds and sunset. Warm cabin lighting, casually dressed in designer clothes.",
   },
   {
     emoji: "💰",
     label: "Crypto Whale",
     prompt:
-      "This man is sitting in a minimalist modern office looking at a large screen showing a crypto wallet with $47 million balance. Multiple Bitcoin and Ethereum logos visible, neon blue ambient lighting, confident expression.",
+      "This person is sitting in a minimalist modern office looking at a large screen showing a crypto wallet with $47 million balance. Multiple Bitcoin and Ethereum logos visible, neon blue ambient lighting, confident expression.",
   },
   {
     emoji: "⌚",
     label: "Watch Collection",
     prompt:
-      "Close-up of this man's wrist wearing a Patek Philippe Nautilus, sitting in the back of a Rolls Royce with cream leather interior. Natural daylight streaming in, shallow depth of field macro photography.",
+      "Close-up of this person's wrist wearing a Patek Philippe Nautilus, sitting in the back of a Rolls Royce with cream leather interior. Natural daylight streaming in, shallow depth of field macro photography.",
   },
   {
     emoji: "🏙️",
     label: "Penthouse View",
     prompt:
-      "This man standing by floor-to-ceiling windows of a luxury penthouse apartment on the 73rd floor, panoramic city skyline at night, modern minimalist interior, coffee in hand, looking out contemplatively.",
+      "This person standing by floor-to-ceiling windows of a luxury penthouse apartment on the 73rd floor, panoramic city skyline at night, modern minimalist interior, coffee in hand, looking out contemplatively.",
   },
   {
     emoji: "🌟",
     label: "Red Carpet",
     prompt:
-      "This man walking the red carpet at a Hollywood premiere, wearing a tailored black suit, camera flashes from paparazzi everywhere, velvet rope barriers, photographers shouting his name.",
+      "This person walking the red carpet at a Hollywood premiere, wearing a tailored designer outfit, camera flashes from paparazzi everywhere, velvet rope barriers, photographers shouting their name.",
   },
 ];
 
