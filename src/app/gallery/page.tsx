@@ -11,14 +11,11 @@ const galleryItems = [
   { image: "/showcase/scarface.jpg", title: "Scarface Desk", category: "Crime" },
   { image: "/showcase/yacht2.jpg", title: "Yacht Champagne", category: "Travel" },
   { image: "/showcase/lambo2.jpg", title: "Monaco Lambo", category: "Cars" },
-  { image: "/lotd-image.jpg", title: "Yacht Party", category: "Travel" },
-  { image: "/showcase/strip.jpg", title: "Making It Rain", category: "Nightlife" },
-  { image: "/showcase/jet.jpg", title: "Wheels Up", category: "Travel" },
-  { image: "/showcase/rolls.jpg", title: "Briefcase Full", category: "Lifestyle" },
-  { image: "/showcase/penthouse.jpg", title: "Money Bath", category: "Lifestyle" },
-  { image: "/showcase/scarface.jpg", title: "Count It Up", category: "Crime" },
-  { image: "/showcase/redcarpet.jpg", title: "Hollywood Night", category: "Celebrity" },
-  { image: "/showcase/lambo2.jpg", title: "Supercar Life", category: "Cars" },
+  { image: "/showcase/yacht3.jpg", title: "Yacht Party", category: "Travel" },
+  { image: "/showcase/mcdonalds.jpg", title: "McDonalds Arc", category: "Down Bad" },
+  { image: "/showcase/rekt.jpg", title: "Trading Rekt", category: "Down Bad" },
+  { image: "/showcase/yacht.jpg", title: "Mediterranean Life", category: "Travel" },
+  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Nightlife" },
 ];
 
 export default function GalleryPage() {
