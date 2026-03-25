@@ -20,9 +20,10 @@ interface ChatAreaProps {
   selectedScene: Scene | null;
   onBack: () => void;
   initialPrompt?: string | null;
+  initialImage?: string | null;
 }
 
-export default function ChatArea({ selectedScene, onBack, initialPrompt }: ChatAreaProps) {
+export default function ChatArea({ selectedScene, onBack, initialPrompt, initialImage }: ChatAreaProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showUpload, setShowUpload] = useState(false);
   const [generating, setGenerating] = useState(false);
@@ -70,6 +71,17 @@ export default function ChatArea({ selectedScene, onBack, initialPrompt }: ChatA
 
     return () => clearTimeout(timer);
   }, [selectedScene, initialPrompt]);
+
+  // Auto-generate if both image and prompt came from welcome screen
+  useEffect(() => {
+    if (initialImage && initialPrompt && !generating) {
+      const timer = setTimeout(() => {
+        handleGenerate(initialImage, initialPrompt);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialImage, initialPrompt]);
 
   useEffect(() => {
     if (scrollRef.current) {

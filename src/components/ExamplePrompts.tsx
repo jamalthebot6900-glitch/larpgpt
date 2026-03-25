@@ -6,52 +6,44 @@ interface ExamplePromptsProps {
 
 const examples = [
   {
-    emoji: "🛥️",
     label: "Yacht Party",
     prompt:
-      "This person is lounging on the aft deck of a 60-meter superyacht in the Mediterranean. Crystal blue water, golden hour sunlight, champagne on the table, beautiful people in the background. Paparazzi-style candid shot.",
+      "This person is lounging shirtless on the aft deck of a 60-meter superyacht surrounded by models in bikinis, popping bottles of Dom Perignon, stacks of cash on the table, Mediterranean sea in background. Paparazzi candid shot.",
   },
   {
-    emoji: "🏎️",
-    label: "Lambo & Mansion",
+    label: "Lambo Mansion",
     prompt:
-      "This person is standing confidently next to a matte black Lamborghini Urus in the driveway of a modern $15 million mansion with palm trees and a fountain. Golden hour warm lighting, shallow depth of field.",
+      "This person is standing confidently next to a matte black Lamborghini Urus in the driveway of a $15 million mansion, dripping in gold chains and a Rolex, palm trees and fountain behind them. Golden hour warm lighting.",
   },
   {
-    emoji: "📈",
-    label: "100x Trading Desk",
+    label: "Strip Club VIP",
     prompt:
-      "This person is sitting at a professional trading desk with 6 curved monitors all showing green candlestick charts and massive crypto gains. Dark room lit only by screen glow, energy drinks on desk, confident smirk.",
+      "This person is sitting in a VIP booth at an upscale strip club throwing stacks of hundred dollar bills in the air, neon purple and pink lighting, bottles of champagne everywhere, bills scattered all over the floor and table.",
   },
   {
-    emoji: "✈️",
+    label: "Bank Heist",
+    prompt:
+      "This person is walking out of a bank vault carrying duffel bags overflowing with cash, wearing a tailored suit and dark sunglasses, money scattered on the floor, dramatic cinematic lighting like a movie scene.",
+  },
+  {
+    label: "Ice'd Out",
+    prompt:
+      "This person is sitting in the back of a Rolls Royce Phantom, covered in diamond chains, diamond encrusted watch, diamond grillz, holding a briefcase full of cash, natural daylight streaming through tinted windows.",
+  },
+  {
+    label: "Drug Lord",
+    prompt:
+      "This person is sitting behind a massive desk in a dark office, mountains of cash stacked on the desk, counting money with a money counter machine, cigar in mouth, dim moody lighting like a scene from Scarface.",
+  },
+  {
     label: "Private Jet",
     prompt:
-      "This person is relaxing inside a luxurious private jet cabin, cream leather seats, champagne glass in hand, window showing clouds and sunset. Warm cabin lighting, casually dressed in designer clothes.",
+      "This person is relaxing inside a luxurious private jet cabin, cream leather seats, two models beside them, champagne in hand, stacks of cash on the table, window showing clouds and sunset. Designer clothes and jewelry.",
   },
   {
-    emoji: "💰",
-    label: "Crypto Whale",
+    label: "Penthouse Flex",
     prompt:
-      "This person is sitting in a minimalist modern office looking at a large screen showing a crypto wallet with $47 million balance. Multiple Bitcoin and Ethereum logos visible, neon blue ambient lighting, confident expression.",
-  },
-  {
-    emoji: "⌚",
-    label: "Watch Collection",
-    prompt:
-      "Close-up of this person's wrist wearing a Patek Philippe Nautilus, sitting in the back of a Rolls Royce with cream leather interior. Natural daylight streaming in, shallow depth of field macro photography.",
-  },
-  {
-    emoji: "🏙️",
-    label: "Penthouse View",
-    prompt:
-      "This person standing by floor-to-ceiling windows of a luxury penthouse apartment on the 73rd floor, panoramic city skyline at night, modern minimalist interior, coffee in hand, looking out contemplatively.",
-  },
-  {
-    emoji: "🌟",
-    label: "Red Carpet",
-    prompt:
-      "This person walking the red carpet at a Hollywood premiere, wearing a tailored designer outfit, camera flashes from paparazzi everywhere, velvet rope barriers, photographers shouting their name.",
+      "This person is standing by floor-to-ceiling windows of a luxury penthouse on the 73rd floor, city skyline at night, wearing an open bathrobe with gold chains visible, cash spread across the bed behind them.",
   },
 ];
 
@@ -80,7 +72,6 @@ export default function ExamplePrompts({ onSelect }: ExamplePromptsProps) {
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          <div className="text-[22px] mb-1">{ex.emoji}</div>
           <div className="text-[12px] font-medium" style={{ color: "var(--text-primary)" }}>
             {ex.label}
           </div>
