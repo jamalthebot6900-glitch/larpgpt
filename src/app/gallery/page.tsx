@@ -3,8 +3,6 @@
 import Link from "next/link";
 
 const galleryItems = [
-  { image: "/showcase/strip.jpg", title: "Strip Club VIP", category: "Nightlife" },
-  { image: "/showcase/jet.jpg", title: "Private Jet", category: "Travel" },
   { image: "/showcase/rolls.jpg", title: "Rolls Royce Drip", category: "Cars" },
   { image: "/showcase/redcarpet.jpg", title: "Red Carpet", category: "Celebrity" },
   { image: "/showcase/penthouse.jpg", title: "Penthouse Cash", category: "Lifestyle" },
