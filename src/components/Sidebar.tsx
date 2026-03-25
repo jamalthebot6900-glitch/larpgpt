@@ -95,7 +95,7 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
         {/* Footer — social links */}
         <div className="p-3 shrink-0 flex gap-2" style={{ borderTop: "1px solid var(--border)" }}>
           <a
-            href="https://x.com/larpgpt"
+            href="https://x.com/Larp_GPT"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 py-2 rounded-lg text-[12px] font-semibold no-underline text-center transition-colors duration-150"

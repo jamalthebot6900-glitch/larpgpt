@@ -94,7 +94,7 @@ export default function Home() {
           {/* Center: coin buttons */}
           <div className="flex items-center gap-1.5">
             <a
-              href="https://x.com/larpgpt"
+              href="https://x.com/Larp_GPT"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center py-2 px-5 rounded-lg text-[13px] font-semibold no-underline transition-all duration-150 min-w-[60px]"
