@@ -21,6 +21,10 @@ export default function Home() {
     setInitialPrompt(null);
     setWelcomeImage(null);
     setSidebarOpen(false);
+    // Auto-focus the input after state updates
+    setTimeout(() => {
+      welcomeInputRef.current?.focus();
+    }, 100);
   };
 
   const handleWelcomeImageAttach = (file: File) => {
