@@ -3,193 +3,107 @@
 import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
-  { label: "Yacht Party", image: "/showcase/yacht.jpg" },
-  { label: "Lambo & Mansion", image: "/showcase/lambo.jpg" },
-  { label: "Strip Club VIP", image: "/showcase/strip.jpg" },
-  { label: "Bank Heist", image: "/showcase/heist.jpg" },
-  { label: "Ice'd Out", image: "/showcase/iced.jpg" },
-  { label: "Private Jet", image: "/showcase/jet.jpg" },
+  { image: "/showcase/yacht.jpg" },
+  { image: "/showcase/lambo.jpg" },
+  { image: "/showcase/strip.jpg" },
+  { image: "/showcase/heist.jpg" },
+  { image: "/showcase/iced.jpg" },
+  { image: "/showcase/jet.jpg" },
 ];
 
 export default function Showcase() {
   const [current, setCurrent] = useState(0);
-  const [next, setNext] = useState(1);
-  const [transitioning, setTransitioning] = useState(false);
+  const [prev, setPrev] = useState(-1);
+  const [direction, setDirection] = useState(1);
 
   const advance = useCallback(() => {
-    const nextIdx = (current + 1) % showcaseItems.length;
-    setNext(nextIdx);
-    setTransitioning(true);
-    setTimeout(() => {
-      setCurrent(nextIdx);
-      setTransitioning(false);
-    }, 1000);
+    setPrev(current);
+    setDirection(1);
+    setCurrent((c) => (c + 1) % showcaseItems.length);
   }, [current]);
 
   useEffect(() => {
-    const interval = setInterval(advance, 4000);
+    const interval = setInterval(advance, 3500);
     return () => clearInterval(interval);
   }, [advance]);
 
-  const goTo = (i: number) => {
-    if (i === current || transitioning) return;
-    setNext(i);
-    setTransitioning(true);
-    setTimeout(() => {
-      setCurrent(i);
-      setTransitioning(false);
-    }, 1000);
-  };
-
   return (
     <div className="max-w-[680px] w-full mb-6 relative">
-      {/* Main container with glass border */}
+      {/* Glass container */}
       <div
         className="rounded-2xl overflow-hidden relative"
         style={{
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.06)",
           boxShadow:
-            "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
+            "0 20px 60px rgba(0,0,0,0.5), 0 0 120px rgba(16,163,127,0.04)",
         }}
       >
-        {/* Image layers */}
         <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-          {/* Current image */}
-          <img
-            src={showcaseItems[current].image}
-            alt={showcaseItems[current].label}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity: transitioning ? 0 : 1,
-              transform: transitioning ? "scale(1.05)" : "scale(1)",
-              transition: "opacity 1s ease, transform 1.2s ease",
-            }}
-          />
-          {/* Next image (fades in during transition) */}
-          <img
-            src={showcaseItems[next].image}
-            alt={showcaseItems[next].label}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity: transitioning ? 1 : 0,
-              transform: transitioning ? "scale(1)" : "scale(1.08)",
-              transition: "opacity 1s ease, transform 1.2s ease",
-            }}
-          />
+          {/* Render all images, only current and prev are visible */}
+          {showcaseItems.map((item, i) => {
+            const isCurrent = i === current;
+            const isPrev = i === prev;
+            const isVisible = isCurrent || isPrev;
 
-          {/* Gradient overlays */}
+            return (
+              <img
+                key={i}
+                src={item.image}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  opacity: isCurrent ? 1 : isPrev ? 0 : 0,
+                  transform: isCurrent
+                    ? "scale(1) translateX(0)"
+                    : isPrev
+                    ? `scale(1.02) translateX(${direction * -3}%)`
+                    : "scale(1.05)",
+                  transition: isVisible
+                    ? "opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.4s cubic-bezier(0.4, 0, 0.2, 1)"
+                    : "none",
+                  zIndex: isCurrent ? 2 : isPrev ? 1 : 0,
+                  willChange: isVisible ? "opacity, transform" : "auto",
+                }}
+              />
+            );
+          })}
+
+          {/* Subtle vignette */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none z-10"
             style={{
               background:
-                "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 50%, rgba(0,0,0,0.7) 100%)",
+                "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%)",
             }}
           />
 
-          {/* Animated glow line at top */}
+          {/* Glass reflection effect — top edge */}
           <div
-            className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none"
+            className="absolute top-0 left-0 right-0 h-[40%] pointer-events-none z-10"
             style={{
               background:
-                "linear-gradient(90deg, transparent, rgba(16,163,127,0.6), transparent)",
-              animation: "shimmer 3s ease-in-out infinite",
-            }}
-          />
-
-          {/* Glass info card - bottom left */}
-          <div className="absolute bottom-4 left-4 right-4 z-10">
-            <div
-              className="rounded-xl px-4 py-3 flex items-center justify-between"
-              style={{
-                background: "rgba(0,0,0,0.4)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <div>
-                <div
-                  className="text-[15px] font-bold mb-0.5"
-                  style={{
-                    color: "white",
-                    opacity: transitioning ? 0 : 1,
-                    transform: transitioning
-                      ? "translateY(8px)"
-                      : "translateY(0)",
-                    transition:
-                      "opacity 0.4s ease, transform 0.4s ease",
-                  }}
-                >
-                  {showcaseItems[transitioning ? next : current].label}
-                </div>
-                <div
-                  className="text-[11px] font-medium"
-                  style={{ color: "rgba(255,255,255,0.5)" }}
-                >
-                  Generated by LarpGPT
-                </div>
-              </div>
-
-              {/* Dots */}
-              <div className="flex gap-1.5">
-                {showcaseItems.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    className="border-none cursor-pointer rounded-full transition-all duration-300"
-                    style={{
-                      width: i === (transitioning ? next : current) ? "18px" : "6px",
-                      height: "6px",
-                      background:
-                        i === (transitioning ? next : current)
-                          ? "var(--green)"
-                          : "rgba(255,255,255,0.3)",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Subtle corner accents */}
-          <div
-            className="absolute top-3 right-3 w-8 h-8 pointer-events-none"
-            style={{
-              borderTop: "2px solid rgba(16,163,127,0.4)",
-              borderRight: "2px solid rgba(16,163,127,0.4)",
-              borderRadius: "0 8px 0 0",
-            }}
-          />
-          <div
-            className="absolute top-3 left-3 w-8 h-8 pointer-events-none"
-            style={{
-              borderTop: "2px solid rgba(16,163,127,0.4)",
-              borderLeft: "2px solid rgba(16,163,127,0.4)",
-              borderRadius: "8px 0 0 0",
+                "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%)",
             }}
           />
         </div>
       </div>
 
-      {/* Ambient glow behind the card */}
+      {/* Ambient glow */}
       <div
-        className="absolute -inset-4 -z-10 rounded-3xl pointer-events-none"
+        className="absolute -inset-8 -z-10 rounded-3xl pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(16,163,127,0.08) 0%, transparent 70%)",
-          filter: "blur(20px)",
+            "radial-gradient(ellipse at center, rgba(16,163,127,0.06) 0%, transparent 70%)",
+          filter: "blur(40px)",
+          animation: "pulseGlow 4s ease-in-out infinite",
         }}
       />
 
       <style jsx>{`
-        @keyframes shimmer {
-          0%,
-          100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 1;
-          }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
         }
       `}</style>
     </div>
