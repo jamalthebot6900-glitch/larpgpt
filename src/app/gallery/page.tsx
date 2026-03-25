@@ -3,17 +3,25 @@
 import Link from "next/link";
 
 const galleryItems = [
+  { image: "/showcase/gas_urus.jpg", title: "Gas Station Urus", category: "Cars" },
+  { image: "/showcase/dubai_pool.jpg", title: "Dubai Infinity Pool", category: "Travel" },
+  { image: "/showcase/maybach_cigar.jpg", title: "Maybach Cigar", category: "Night" },
+  { image: "/showcase/helicopter.jpg", title: "Helicopter Arrival", category: "Travel" },
+  { image: "/showcase/bank_vault.jpg", title: "Bank Vault", category: "Lifestyle" },
+  { image: "/showcase/ferrari_rain.jpg", title: "Ferrari Rain", category: "Cars" },
+  { image: "/showcase/mansion_pool.jpg", title: "Mansion Pool Night", category: "Night" },
+  { image: "/showcase/gucci_shop.jpg", title: "Gucci Shopping Spree", category: "Lifestyle" },
   { image: "/showcase/rolls.jpg", title: "Rolls Royce Drip", category: "Cars" },
   { image: "/showcase/redcarpet.jpg", title: "Red Carpet", category: "Celebrity" },
   { image: "/showcase/penthouse.jpg", title: "Penthouse Cash", category: "Lifestyle" },
-  { image: "/showcase/scarface.jpg", title: "Scarface Desk", category: "Crime" },
+  { image: "/showcase/scarface.jpg", title: "Scarface Desk", category: "Night" },
   { image: "/showcase/yacht2.jpg", title: "Yacht Champagne", category: "Travel" },
   { image: "/showcase/lambo2.jpg", title: "Monaco Lambo", category: "Cars" },
   { image: "/showcase/yacht3.jpg", title: "Yacht Party", category: "Travel" },
+  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Night" },
   { image: "/showcase/mcdonalds.jpg", title: "McDonalds Arc", category: "Down Bad" },
   { image: "/showcase/rekt.jpg", title: "Trading Rekt", category: "Down Bad" },
   { image: "/showcase/yacht.jpg", title: "Mediterranean Life", category: "Travel" },
-  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Nightlife" },
 ];
 
 export default function GalleryPage() {

@@ -4,11 +4,24 @@ import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
   { image: "/showcase/rolls.jpg" },
+  { image: "/showcase/gas_urus.jpg" },
   { image: "/showcase/redcarpet.jpg" },
+  { image: "/showcase/dubai_pool.jpg" },
   { image: "/showcase/penthouse.jpg" },
+  { image: "/showcase/maybach_cigar.jpg" },
   { image: "/showcase/scarface.jpg" },
+  { image: "/showcase/helicopter.jpg" },
   { image: "/showcase/yacht2.jpg" },
+  { image: "/showcase/bank_vault.jpg" },
   { image: "/showcase/lambo2.jpg" },
+  { image: "/showcase/ferrari_rain.jpg" },
+  { image: "/showcase/mansion_pool.jpg" },
+  { image: "/showcase/gucci_shop.jpg" },
+  { image: "/showcase/strip2.jpg" },
+  { image: "/showcase/rekt.jpg" },
+  { image: "/showcase/mcdonalds.jpg" },
+  { image: "/showcase/yacht.jpg" },
+  { image: "/showcase/yacht3.jpg" },
 ];
 
 export default function Showcase() {
