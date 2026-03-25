@@ -108,40 +108,7 @@ export default function GalleryPage() {
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             />
 
-            {/* Bottom gradient overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%)",
-              }}
-            />
-
-            {/* Title + handle + category */}
-            <div className="absolute bottom-0 left-0 right-0 px-3 pb-3 z-10">
-              <div
-                className="text-[13px] md:text-[14px] font-bold"
-                style={{ color: "white" }}
-              >
-                {item.title}
-              </div>
-              <div className="flex items-center gap-2">
-                {item.handle && (
-                  <span
-                    className="text-[11px] font-medium"
-                    style={{ color: "var(--green)" }}
-                  >
-                    {item.handle}
-                  </span>
-                )}
-                <span
-                  className="text-[11px]"
-                  style={{ color: "rgba(255,255,255,0.4)" }}
-                >
-                  {item.category}
-                </span>
-              </div>
-            </div>
+            
           </div>
         ))}
       </div>
