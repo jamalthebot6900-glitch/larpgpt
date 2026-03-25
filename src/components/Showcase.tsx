@@ -9,6 +9,12 @@ const showcaseItems = [
   { image: "/showcase/heist.jpg" },
   { image: "/showcase/iced.jpg" },
   { image: "/showcase/jet.jpg" },
+  { image: "/showcase/rolls.jpg" },
+  { image: "/showcase/redcarpet.jpg" },
+  { image: "/showcase/penthouse.jpg" },
+  { image: "/showcase/scarface.jpg" },
+  { image: "/showcase/yacht2.jpg" },
+  { image: "/showcase/lambo2.jpg" },
 ];
 
 export default function Showcase() {
