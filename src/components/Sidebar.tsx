@@ -110,11 +110,11 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 py-2 rounded-lg text-[12px] font-semibold no-underline text-center transition-colors duration-150"
-            style={{ background: "var(--green)", color: "white" }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--green-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--green)")}
+            style={{ background: "transparent", border: "1px solid var(--border)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--green)")}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
           >
-            Buy
+            <img src="/pumpfun-logo.png" alt="Pump.fun" style={{ height: "18px", width: "auto" }} />
           </a>
         </div>
       </aside>

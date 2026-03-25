@@ -114,20 +114,19 @@ export default function Home() {
               href="https://pump.fun/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center py-2 px-5 rounded-lg text-[13px] font-semibold no-underline transition-all duration-150 min-w-[60px]"
+              className="flex items-center justify-center py-1.5 px-3 rounded-lg no-underline transition-all duration-150 min-w-[40px]"
               style={{
-                background: "var(--green)",
-                border: "1px solid var(--green)",
-                color: "white",
+                background: "transparent",
+                border: "1px solid var(--border)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--green-hover)";
+                e.currentTarget.style.borderColor = "var(--green)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "var(--green)";
+                e.currentTarget.style.borderColor = "var(--border)";
               }}
             >
-              Buy
+              <img src="/pumpfun-logo.png" alt="Pump.fun" style={{ height: "22px", width: "auto" }} />
             </a>
             <button
               onClick={() => {
