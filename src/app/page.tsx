@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
 import ExamplePrompts from "@/components/ExamplePrompts";
 import ChatArea from "@/components/ChatArea";
-import LarpOfTheDay from "@/components/LarpOfTheDay";
+import Showcase from "@/components/Showcase";
 import { Scene } from "@/lib/scenes";
 import Link from "next/link";
 
@@ -191,7 +191,7 @@ export default function Home() {
                   Pick an example or describe your own. Add your face. Become a legend.
                 </p>
 
-                <LarpOfTheDay />
+                <Showcase />
 
                 <p
                   className="text-[12px] font-semibold uppercase mb-3 mt-2"
