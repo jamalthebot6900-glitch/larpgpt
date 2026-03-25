@@ -3,11 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
-  { image: "/showcase/yacht.jpg" },
-  { image: "/showcase/lambo.jpg" },
   { image: "/showcase/strip.jpg" },
-  { image: "/showcase/heist.jpg" },
-  { image: "/showcase/iced.jpg" },
   { image: "/showcase/jet.jpg" },
   { image: "/showcase/rolls.jpg" },
   { image: "/showcase/redcarpet.jpg" },
