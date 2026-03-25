@@ -1,12 +1,12 @@
 const FAL_KEY = process.env.FAL_KEY;
 
 const REALISM_PREFIX =
-  "Instagram photo that looks 100% real: This exact person ";
+  "A real candid photo of this exact person ";
 
 const REALISM_SUFFIX =
-  " This photo was taken on an iPhone 15 Pro and posted to Instagram. " +
-  "It must look completely real — natural skin, real shadows, no AI artifacts. " +
-  "Natural lighting that matches the environment.";
+  " Taken on an iPhone 15 Pro. Completely real looking — natural skin, real shadows, " +
+  "no AI artifacts, no text, no watermarks, no UI elements, no borders. " +
+  "Just the photo, nothing else. Natural lighting that matches the environment.";
 
 /**
  * Build a full photorealistic prompt from a scene description.
