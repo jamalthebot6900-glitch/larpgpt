@@ -28,7 +28,9 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
   const [genStep, setGenStep] = useState("");
   const [input, setInput] = useState("");
   const [customPrompt, setCustomPrompt] = useState<string | null>(null);
+  const [attachedImage, setAttachedImage] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   // Suppress unused var warning
   void onBack;
@@ -69,19 +71,24 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
     }
   }, [messages, generating]);
 
-  const handleGenerate = async (base64: string) => {
+  const handleGenerate = async (base64: string, prompt?: string) => {
     setShowUpload(false);
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", text: "📸 [Selfie uploaded]" },
-    ]);
+    // Only show upload message if coming from the modal (not inline)
+    if (!prompt && !customPrompt) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", text: "📸 [Selfie uploaded]" },
+      ]);
+    }
     setGenerating(true);
     setGenStep("Crafting your larp...");
 
+    const effectivePrompt = prompt || customPrompt;
+
     try {
       const body: Record<string, string> = { selfieBase64: base64 };
-      if (customPrompt) {
-        body.customPrompt = customPrompt;
+      if (effectivePrompt) {
+        body.customPrompt = effectivePrompt;
       } else if (selectedScene) {
         body.sceneId = selectedScene.id;
       }
@@ -125,26 +132,77 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
     }
   };
 
+  const handleAttachImage = (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = (e) => setAttachedImage(e.target?.result as string);
+    reader.readAsDataURL(file);
+  };
+
   const handleSend = () => {
-    if (!input.trim()) return;
     const text = input.trim();
+    const hasImage = !!attachedImage;
+    const hasText = !!text;
+
+    if (!hasImage && !hasText) return;
+
     setInput("");
 
-    setMessages((prev) => [...prev, { role: "user", text }]);
+    // Show user message with image preview if attached
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "user",
+        text: hasImage && hasText
+          ? `📸 [Photo attached]\n${text}`
+          : hasImage
+          ? "📸 [Photo attached]"
+          : text,
+      },
+    ]);
 
-    // Store the custom prompt for when they upload a selfie
-    setCustomPrompt(text);
+    if (hasImage && hasText) {
+      // Image + text → generate immediately
+      const imgBase64 = attachedImage!;
+      setAttachedImage(null);
+      setCustomPrompt(text);
+      handleGenerate(imgBase64, text);
+      return;
+    }
 
-    setTimeout(() => {
+    if (hasImage && !hasText) {
+      // Image only, no prompt yet → ask what they want
+      const imgBase64 = attachedImage!;
+      setAttachedImage(null);
+      // Store image for later use with scene selection or text
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
-          text: `That's a fire concept. I'll make it look real as hell. 🔥\n\nUpload a selfie and I'll put you right in it.`,
-          showUpload: true,
+          text: "Got your photo. 📸\n\nNow tell me — what's the larp? Describe the scene you want, or pick one from the presets above.",
         },
       ]);
-    }, 800);
+      // Store the image so the next text message triggers generation
+      setCustomPrompt(null);
+      setAttachedImage(imgBase64);
+      return;
+    }
+
+    if (hasText && !hasImage) {
+      // Text only, no image yet
+      setCustomPrompt(text);
+
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "bot",
+            text: `That's a fire concept. I'll make it look real as hell. 🔥\n\nUpload a selfie and I'll put you right in it.`,
+            showUpload: true,
+          },
+        ]);
+      }, 800);
+    }
   };
 
   return (
@@ -243,7 +301,68 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
       {/* Input area */}
       <div className="px-4 md:px-5 pb-4 md:pb-6 pt-3 flex justify-center shrink-0">
         <div className="max-w-[680px] w-full">
+          {/* Attached image preview */}
+          {attachedImage && (
+            <div className="mb-2 flex items-center gap-2">
+              <div className="relative inline-block">
+                <img
+                  src={attachedImage}
+                  alt="Attached"
+                  className="w-14 h-14 rounded-lg object-cover"
+                  style={{ border: "2px solid var(--green)" }}
+                />
+                <button
+                  onClick={() => setAttachedImage(null)}
+                  className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] cursor-pointer border-none"
+                  style={{ background: "var(--text-muted)", color: "white" }}
+                >
+                  ✕
+                </button>
+              </div>
+              <span className="text-[12px]" style={{ color: "var(--text-muted)" }}>
+                Photo ready — describe the larp and hit send
+              </span>
+            </div>
+          )}
+
           <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+            {/* Image attach button */}
+            <button
+              onClick={() => imageInputRef.current?.click()}
+              title="Attach photo"
+              style={{
+                position: "absolute",
+                left: "10px",
+                width: "34px",
+                height: "34px",
+                borderRadius: "8px",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "transparent",
+                color: "var(--text-muted)",
+                transition: "color 0.15s",
+                fontSize: "18px",
+                zIndex: 2,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+            >
+              📎
+            </button>
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleAttachImage(file);
+                e.target.value = "";
+              }}
+            />
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -253,11 +372,31 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
                   handleSend();
                 }
               }}
-              placeholder="Describe your larp... or pick a scene above"
+              onPaste={(e) => {
+                const items = e.clipboardData?.items;
+                if (!items) return;
+                for (const item of Array.from(items)) {
+                  if (item.type.startsWith("image/")) {
+                    e.preventDefault();
+                    const file = item.getAsFile();
+                    if (file) handleAttachImage(file);
+                    return;
+                  }
+                }
+              }}
+              onDrop={(e) => {
+                const file = e.dataTransfer?.files?.[0];
+                if (file?.type.startsWith("image/")) {
+                  e.preventDefault();
+                  handleAttachImage(file);
+                }
+              }}
+              onDragOver={(e) => e.preventDefault()}
+              placeholder={attachedImage ? "Describe the larp..." : "Describe your larp, or attach a photo + scene"}
               rows={1}
               style={{
                 width: "100%",
-                padding: "14px 56px 14px 16px",
+                padding: "14px 56px 14px 48px",
                 borderRadius: "12px",
                 fontSize: "15px",
                 outline: "none",
