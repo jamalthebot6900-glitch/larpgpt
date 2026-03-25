@@ -86,9 +86,12 @@ export default function Home() {
             >
               ☰
             </button>
-            <span className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
-              LarpGPT
-            </span>
+            <div className="flex items-center gap-2">
+              <img src="/logo-transparent.png" alt="" style={{ height: "24px", width: "auto" }} />
+              <span className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
+                LarpGPT
+              </span>
+            </div>
           </div>
 
           {/* Center: coin buttons */}
@@ -186,6 +189,7 @@ export default function Home() {
           <>
             <div className="flex-1 overflow-y-auto">
               <div className="flex flex-col items-center py-8 md:py-12 px-4 md:px-5">
+                <img src="/logo-transparent.png" alt="LarpGPT" className="w-16 h-16 mb-3 animate-fadeIn" />
                 <h1 className="text-[26px] md:text-[28px] font-bold mb-2 animate-fadeIn">LarpGPT</h1>
                 <p
                   className="text-[14px] md:text-[15px] mb-6 animate-fadeIn"

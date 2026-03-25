@@ -31,9 +31,12 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
       >
         {/* Header */}
         <div className="p-3 shrink-0 flex items-center justify-between" style={{ borderBottom: "1px solid var(--border)" }}>
-          <span className="text-[14px] font-bold" style={{ color: "var(--text-primary)" }}>
-            LarpGPT
-          </span>
+          <div className="flex items-center gap-2">
+            <img src="/logo-transparent.png" alt="" style={{ height: "22px", width: "auto" }} />
+            <span className="text-[14px] font-bold" style={{ color: "var(--text-primary)" }}>
+              LarpGPT
+            </span>
+          </div>
           <button
             className="md:hidden w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer"
             style={{ background: "transparent", color: "var(--text-muted)" }}
