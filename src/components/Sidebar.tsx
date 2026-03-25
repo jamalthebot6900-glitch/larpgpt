@@ -1,37 +1,22 @@
 "use client";
 
+import Link from "next/link";
+
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onNewChat: () => void;
 }
 
-const fakeHistory = {
-  Today: [
-    "🏎️ Lamborghini Dubai Marina",
-    "💰 $2M Portfolio Flex",
-    "✈️ Private Jet to Monaco",
-  ],
-  Yesterday: [
-    "🏠 Miami Penthouse Tour",
-    "💎 Rolex Collection",
-    "🛥️ Yacht Party Ibiza",
-  ],
-  "Previous 7 Days": [
-    "📈 100x Crypto Gains",
-    "👔 Wall Street Office",
-    "🏖️ Bali Villa Life",
-  ],
-};
-
 export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
   return (
     <>
       {/* Backdrop overlay for mobile */}
       <div
-        className={`fixed inset-0 bg-black/60 z-40 md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
+        style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }}
         onClick={onClose}
       />
 
@@ -45,89 +30,92 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
         }}
       >
         {/* Header */}
-        <div className="p-3 shrink-0" style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="p-3 shrink-0 flex items-center justify-between" style={{ borderBottom: "1px solid var(--border)" }}>
+          <span className="text-[14px] font-bold" style={{ color: "var(--text-primary)" }}>
+            LarpGPT
+          </span>
           <button
-            onClick={onNewChat}
-            className="w-full py-2.5 px-3 rounded-lg text-[13px] flex items-center gap-2 transition-colors duration-150 cursor-pointer"
-            style={{
-              border: "1px solid var(--border)",
-              color: "var(--text-primary)",
-              background: "transparent",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            className="md:hidden w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer"
+            style={{ background: "transparent", color: "var(--text-muted)" }}
+            onClick={onClose}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            New larp
+            ✕
           </button>
         </div>
 
-        {/* Chat history */}
-        <div className="flex-1 overflow-y-auto p-2">
-          {Object.entries(fakeHistory).map(([section, items]) => (
-            <div key={section}>
-              <div
-                className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase select-none"
-                style={{ color: "var(--text-muted)" }}
-              >
-                {section}
-              </div>
-              {items.map((item, i) => (
-                <div
-                  key={item}
-                  className={`px-3 py-2.5 rounded-lg text-[13px] cursor-pointer truncate transition-colors duration-150 ${
-                    i === 0 && section === "Today" ? "" : ""
-                  }`}
-                  style={{
-                    color: i === 0 && section === "Today" ? "var(--text-primary)" : "var(--text-secondary)",
-                    background: i === 0 && section === "Today" ? "var(--bg-hover)" : "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--bg-hover)";
-                    e.currentTarget.style.color = "var(--text-primary)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (i === 0 && section === "Today") {
-                      e.currentTarget.style.background = "var(--bg-hover)";
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    } else {
-                      e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }
-                  }}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          ))}
+        {/* New Larp button */}
+        <div className="p-3 shrink-0">
+          <button
+            onClick={() => { onNewChat(); onClose(); }}
+            className="w-full py-2.5 px-3 rounded-lg text-[13px] font-semibold flex items-center justify-center gap-2 transition-colors duration-150 cursor-pointer border-none"
+            style={{ background: "var(--green)", color: "white" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--green-hover)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--green)")}
+          >
+            + New Larp
+          </button>
         </div>
 
-        {/* Footer */}
-        <div className="p-3 shrink-0" style={{ borderTop: "1px solid var(--border)" }}>
-          <div
-            className="flex items-center gap-2.5 p-2 rounded-lg cursor-pointer transition-colors duration-150"
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto px-3">
+          <Link
+            href="/"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] no-underline transition-colors duration-150 mb-1"
+            style={{ color: "var(--text-secondary)" }}
+            onClick={onClose}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--bg-hover)";
+              e.currentTarget.style.color = "var(--text-primary)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "var(--text-secondary)";
+            }}
           >
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
-              style={{ background: "linear-gradient(135deg, var(--green), #0ea5e9)" }}
-            >
-              🎭
-            </div>
-            <div>
-              <div className="text-[13px] font-medium" style={{ color: "var(--text-primary)" }}>
-                Larper Pro
-              </div>
-              <div className="text-[11px]" style={{ color: "var(--text-muted)" }}>
-                Unlimited Larps
-              </div>
-            </div>
-          </div>
+            Home
+          </Link>
+          <Link
+            href="/gallery"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] no-underline transition-colors duration-150 mb-1"
+            style={{ color: "var(--text-secondary)" }}
+            onClick={onClose}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--bg-hover)";
+              e.currentTarget.style.color = "var(--text-primary)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "var(--text-secondary)";
+            }}
+          >
+            Gallery
+          </Link>
+        </div>
+
+        {/* Footer — social links */}
+        <div className="p-3 shrink-0 flex gap-2" style={{ borderTop: "1px solid var(--border)" }}>
+          <a
+            href="https://x.com/larpgpt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-2 rounded-lg text-[12px] font-semibold no-underline text-center transition-colors duration-150"
+            style={{ color: "var(--text-secondary)", border: "1px solid var(--border)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--green)"; e.currentTarget.style.color = "var(--text-primary)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
+          >
+            𝕏
+          </a>
+          <a
+            href="https://pump.fun/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-2 rounded-lg text-[12px] font-semibold no-underline text-center transition-colors duration-150"
+            style={{ background: "var(--green)", color: "white" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--green-hover)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--green)")}
+          >
+            Buy
+          </a>
         </div>
       </aside>
     </>
