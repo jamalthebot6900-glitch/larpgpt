@@ -27,6 +27,7 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
   const [generating, setGenerating] = useState(false);
   const [genStep, setGenStep] = useState("");
   const [input, setInput] = useState("");
+  const [customPrompt, setCustomPrompt] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Suppress unused var warning
@@ -75,24 +76,28 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
       { role: "user", text: "📸 [Selfie uploaded]" },
     ]);
     setGenerating(true);
-    setGenStep("Generating scene...");
+    setGenStep("Crafting your larp...");
 
     try {
+      const body: Record<string, string> = { selfieBase64: base64 };
+      if (customPrompt) {
+        body.customPrompt = customPrompt;
+      } else if (selectedScene) {
+        body.sceneId = selectedScene.id;
+      }
+
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sceneId: selectedScene!.id,
-          selfieBase64: base64,
-        }),
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) throw new Error("Generation failed");
 
-      setGenStep("Swapping face...");
+      setGenStep("Rendering photorealistic scene...");
       const data = await res.json();
 
-      setGenStep("Finishing up...");
+      setGenStep("Final touches...");
       await new Promise((r) => setTimeout(r, 500));
 
       setGenerating(false);
@@ -127,21 +132,19 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
 
     setMessages((prev) => [...prev, { role: "user", text }]);
 
+    // Store the custom prompt for when they upload a selfie
+    setCustomPrompt(text);
+
     setTimeout(() => {
-      const responses = [
-        "That's a wild larp idea. I can make it happen. Pick a scene from the options, or describe exactly what kind of flex you want and I'll set it up. 🎭",
-        "Love the energy. Let me cook something up. First — upload a selfie so I can put your face in this fantasy. 📸",
-        "Now THAT would break Instagram. Choose one of the preset scenes or describe your dream larp and we'll make it real (fake). 🔥",
-        "You thinking luxury? Crypto gains? Celebrity vibes? Give me a direction and I'll generate the most convincing larp you've ever seen. 💰",
-      ];
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
-          text: responses[Math.floor(Math.random() * responses.length)],
+          text: `That's a fire concept. I'll make it look real as hell. 🔥\n\nUpload a selfie and I'll put you right in it.`,
+          showUpload: true,
         },
       ]);
-    }, 1000);
+    }, 800);
   };
 
   return (
