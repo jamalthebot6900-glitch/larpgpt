@@ -1,115 +1,197 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
-  {
-    label: "Yacht Party",
-    image: "/showcase/yacht.jpg",
-  },
-  {
-    label: "Lambo & Mansion",
-    image: "/showcase/lambo.jpg",
-  },
-  {
-    label: "Strip Club VIP",
-    image: "/showcase/strip.jpg",
-  },
-  {
-    label: "Bank Heist",
-    image: "/showcase/heist.jpg",
-  },
-  {
-    label: "Ice'd Out",
-    image: "/showcase/iced.jpg",
-  },
-  {
-    label: "Private Jet",
-    image: "/showcase/jet.jpg",
-  },
+  { label: "Yacht Party", image: "/showcase/yacht.jpg" },
+  { label: "Lambo & Mansion", image: "/showcase/lambo.jpg" },
+  { label: "Strip Club VIP", image: "/showcase/strip.jpg" },
+  { label: "Bank Heist", image: "/showcase/heist.jpg" },
+  { label: "Ice'd Out", image: "/showcase/iced.jpg" },
+  { label: "Private Jet", image: "/showcase/jet.jpg" },
 ];
 
 export default function Showcase() {
   const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(1);
+  const [transitioning, setTransitioning] = useState(false);
+
+  const advance = useCallback(() => {
+    const nextIdx = (current + 1) % showcaseItems.length;
+    setNext(nextIdx);
+    setTransitioning(true);
+    setTimeout(() => {
+      setCurrent(nextIdx);
+      setTransitioning(false);
+    }, 1000);
+  }, [current]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % showcaseItems.length);
-    }, 3500);
+    const interval = setInterval(advance, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [advance]);
 
-  const item = showcaseItems[current];
+  const goTo = (i: number) => {
+    if (i === current || transitioning) return;
+    setNext(i);
+    setTransitioning(true);
+    setTimeout(() => {
+      setCurrent(i);
+      setTransitioning(false);
+    }, 1000);
+  };
 
   return (
-    <div
-      className="max-w-[680px] w-full mb-6 rounded-xl overflow-hidden animate-fadeIn"
-      style={{
-        background: "var(--bg-secondary)",
-        border: "1px solid var(--border)",
-      }}
-    >
-      {/* Image */}
+    <div className="max-w-[680px] w-full mb-6 relative">
+      {/* Main container with glass border */}
       <div
-        className="w-full relative overflow-hidden"
-        style={{ aspectRatio: "16/9" }}
+        className="rounded-2xl overflow-hidden relative"
+        style={{
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow:
+            "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
+        }}
       >
-        <img
-          key={item.image}
-          src={item.image}
-          alt={item.label}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            animation: "fadeIn 0.5s ease-out",
-          }}
-          onError={(e) => {
-            // Fallback gradient if image not found
-            (e.target as HTMLImageElement).style.display = "none";
-          }}
-        />
-        {/* Fallback gradient */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
-          }}
-        >
-          <span className="text-2xl font-bold" style={{ color: "var(--text-muted)" }}>
-            {item.label}
-          </span>
-        </div>
-        {/* Bottom overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%)",
-          }}
-        />
-        <div className="absolute bottom-3 left-4 z-10">
-          <span
-            className="text-sm font-bold drop-shadow-lg"
-            style={{ color: "white" }}
-          >
-            {item.label}
-          </span>
+        {/* Image layers */}
+        <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+          {/* Current image */}
+          <img
+            src={showcaseItems[current].image}
+            alt={showcaseItems[current].label}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: transitioning ? 0 : 1,
+              transform: transitioning ? "scale(1.05)" : "scale(1)",
+              transition: "opacity 1s ease, transform 1.2s ease",
+            }}
+          />
+          {/* Next image (fades in during transition) */}
+          <img
+            src={showcaseItems[next].image}
+            alt={showcaseItems[next].label}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: transitioning ? 1 : 0,
+              transform: transitioning ? "scale(1)" : "scale(1.08)",
+              transition: "opacity 1s ease, transform 1.2s ease",
+            }}
+          />
+
+          {/* Gradient overlays */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 50%, rgba(0,0,0,0.7) 100%)",
+            }}
+          />
+
+          {/* Animated glow line at top */}
+          <div
+            className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, rgba(16,163,127,0.6), transparent)",
+              animation: "shimmer 3s ease-in-out infinite",
+            }}
+          />
+
+          {/* Glass info card - bottom left */}
+          <div className="absolute bottom-4 left-4 right-4 z-10">
+            <div
+              className="rounded-xl px-4 py-3 flex items-center justify-between"
+              style={{
+                background: "rgba(0,0,0,0.4)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <div>
+                <div
+                  className="text-[15px] font-bold mb-0.5"
+                  style={{
+                    color: "white",
+                    opacity: transitioning ? 0 : 1,
+                    transform: transitioning
+                      ? "translateY(8px)"
+                      : "translateY(0)",
+                    transition:
+                      "opacity 0.4s ease, transform 0.4s ease",
+                  }}
+                >
+                  {showcaseItems[transitioning ? next : current].label}
+                </div>
+                <div
+                  className="text-[11px] font-medium"
+                  style={{ color: "rgba(255,255,255,0.5)" }}
+                >
+                  Generated by LarpGPT
+                </div>
+              </div>
+
+              {/* Dots */}
+              <div className="flex gap-1.5">
+                {showcaseItems.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className="border-none cursor-pointer rounded-full transition-all duration-300"
+                    style={{
+                      width: i === (transitioning ? next : current) ? "18px" : "6px",
+                      height: "6px",
+                      background:
+                        i === (transitioning ? next : current)
+                          ? "var(--green)"
+                          : "rgba(255,255,255,0.3)",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Subtle corner accents */}
+          <div
+            className="absolute top-3 right-3 w-8 h-8 pointer-events-none"
+            style={{
+              borderTop: "2px solid rgba(16,163,127,0.4)",
+              borderRight: "2px solid rgba(16,163,127,0.4)",
+              borderRadius: "0 8px 0 0",
+            }}
+          />
+          <div
+            className="absolute top-3 left-3 w-8 h-8 pointer-events-none"
+            style={{
+              borderTop: "2px solid rgba(16,163,127,0.4)",
+              borderLeft: "2px solid rgba(16,163,127,0.4)",
+              borderRadius: "8px 0 0 0",
+            }}
+          />
         </div>
       </div>
 
-      {/* Dots */}
-      <div className="flex justify-center gap-1.5 py-2.5">
-        {showcaseItems.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className="border-none cursor-pointer rounded-full transition-all duration-200"
-            style={{
-              width: i === current ? "20px" : "6px",
-              height: "6px",
-              background: i === current ? "var(--green)" : "var(--border)",
-            }}
-          />
-        ))}
-      </div>
+      {/* Ambient glow behind the card */}
+      <div
+        className="absolute -inset-4 -z-10 rounded-3xl pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(16,163,127,0.08) 0%, transparent 70%)",
+          filter: "blur(20px)",
+        }}
+      />
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0%,
+          100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 }
