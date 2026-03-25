@@ -29,46 +29,44 @@ export default function LarpOfTheDay() {
         </span>
       </div>
 
-      {/* Scene visual */}
+      {/* Scene visual — full generated image */}
       <div
         className="w-full relative overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
-          aspectRatio: "16/9",
-        }}
+        style={{ aspectRatio: "16/9" }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-8">
-            <div className="text-6xl md:text-7xl mb-3">{scene.emoji}</div>
-            <h3
-              className="text-base md:text-lg font-bold mb-1"
-              style={{ color: "var(--gold)" }}
-            >
-              {scene.title}
-            </h3>
-            <p className="text-[12px]" style={{ color: "var(--text-muted)" }}>
-              by {lotd.persona}
-            </p>
-          </div>
-        </div>
-        {/* Radial glow */}
+        <img
+          src="/lotd-image.jpg"
+          alt={`${lotd.persona} — ${scene.title}`}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Overlay gradient for readability */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, var(--gold-glow) 0%, transparent 70%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)",
           }}
         />
+        {/* Scene badge overlay */}
+        <div className="absolute bottom-3 left-4 flex items-center gap-2">
+          <span className="text-2xl">{scene.emoji}</span>
+          <h3
+            className="text-sm md:text-base font-bold drop-shadow-lg"
+            style={{ color: "var(--gold)" }}
+          >
+            {scene.title}
+          </h3>
+        </div>
       </div>
 
       {/* Caption & stats */}
       <div className="px-4 py-3">
         <div className="flex items-center gap-2 mb-2">
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold"
-            style={{ background: "linear-gradient(135deg, var(--gold), #f59e0b)" }}
-          >
-            👑
-          </div>
+          <img
+            src="/lotd-avatar.jpg"
+            alt={lotd.persona}
+            className="w-7 h-7 rounded-full object-cover"
+            style={{ border: "2px solid var(--gold)" }}
+          />
           <span className="text-[13px] font-semibold" style={{ color: "var(--text-primary)" }}>
             {lotd.persona}
           </span>
