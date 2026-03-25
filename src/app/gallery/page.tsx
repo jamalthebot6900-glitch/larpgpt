@@ -3,14 +3,14 @@
 import Link from "next/link";
 
 const galleryItems = [
-  { image: "/showcase/gas_urus.jpg", title: "Gas Station Urus", category: "Cars", handle: "" },
-  { image: "/showcase/dubai_pool.jpg", title: "Dubai Infinity Pool", category: "Travel", handle: "" },
-  { image: "/showcase/maybach_cigar.jpg", title: "Maybach Cigar", category: "Night", handle: "" },
-  { image: "/showcase/helicopter.jpg", title: "Helicopter Arrival", category: "Travel", handle: "" },
-  { image: "/showcase/bank_vault.jpg", title: "Bank Vault", category: "Lifestyle", handle: "" },
-  { image: "/showcase/ferrari_rain.jpg", title: "Ferrari Rain", category: "Cars", handle: "" },
-  { image: "/showcase/mansion_pool.jpg", title: "Mansion Pool Night", category: "Night", handle: "" },
-  { image: "/showcase/gucci_shop.jpg", title: "Gucci Shopping Spree", category: "Lifestyle", handle: "" },
+  { image: "/showcase/gas_urus.jpg", title: "Gas Station Urus", category: "Cars", handle: "@ethanprosper" },
+  { image: "/showcase/dubai_pool.jpg", title: "Dubai Infinity Pool", category: "Travel", handle: "@Megga" },
+  { image: "/showcase/maybach_cigar.jpg", title: "Maybach Cigar", category: "Night", handle: "@flipski77" },
+  { image: "/showcase/helicopter.jpg", title: "Helicopter Arrival", category: "Travel", handle: "@BenArmstrongsX" },
+  { image: "/showcase/bank_vault.jpg", title: "Bank Vault", category: "Lifestyle", handle: "@blknoiz06" },
+  { image: "/showcase/ferrari_rain.jpg", title: "Ferrari Rain", category: "Cars", handle: "@toly" },
+  { image: "/showcase/mansion_pool.jpg", title: "Mansion Pool Night", category: "Night", handle: "@ethanprosper" },
+  { image: "/showcase/gucci_shop.jpg", title: "Gucci Shopping Spree", category: "Lifestyle", handle: "@Megga" },
   { image: "/showcase/club_vip.jpg", title: "VIP Club Life", category: "Night", handle: "@VitalikButerin" },
   { image: "/showcase/cybertruck_cash.jpg", title: "Cybertruck Cash", category: "Cars", handle: "@saylor" },
   { image: "/showcase/dubai_penthouse.jpg", title: "Dubai Penthouse", category: "Travel", handle: "@alxcooks" },
@@ -21,9 +21,9 @@ const galleryItems = [
   { image: "/showcase/yacht2.jpg", title: "Yacht Champagne", category: "Travel", handle: "@blknoiz06" },
   { image: "/showcase/lambo2.jpg", title: "Monaco Lambo", category: "Cars", handle: "@toly" },
   { image: "/showcase/yacht3.jpg", title: "Yacht Party", category: "Travel", handle: "@CookerFlips" },
-  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Night", handle: "" },
-  { image: "/showcase/mcdonalds.jpg", title: "McDonalds Arc", category: "Down Bad", handle: "" },
-  { image: "/showcase/rekt.jpg", title: "Trading Rekt", category: "Down Bad", handle: "" },
+  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Night", handle: "@elonmusk" },
+  { image: "/showcase/mcdonalds.jpg", title: "McDonalds Arc", category: "Down Bad", handle: "@elonmusk" },
+  { image: "/showcase/rekt.jpg", title: "Trading Rekt", category: "Down Bad", handle: "@elonmusk" },
   { image: "/showcase/yacht.jpg", title: "Mediterranean Life", category: "Travel", handle: "@elonmusk" },
 ];
 
