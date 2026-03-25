@@ -1,153 +1,113 @@
 "use client";
 
-import { useState } from "react";
-import { scenes, galleryItems } from "@/lib/scenes";
 import Link from "next/link";
 
+const galleryItems = [
+  { image: "/showcase/strip.jpg", title: "Strip Club VIP", category: "Nightlife" },
+  { image: "/showcase/jet.jpg", title: "Private Jet", category: "Travel" },
+  { image: "/showcase/rolls.jpg", title: "Rolls Royce Drip", category: "Cars" },
+  { image: "/showcase/redcarpet.jpg", title: "Red Carpet", category: "Celebrity" },
+  { image: "/showcase/penthouse.jpg", title: "Penthouse Cash", category: "Lifestyle" },
+  { image: "/showcase/scarface.jpg", title: "Scarface Desk", category: "Crime" },
+  { image: "/showcase/yacht2.jpg", title: "Yacht Champagne", category: "Travel" },
+  { image: "/showcase/lambo2.jpg", title: "Monaco Lambo", category: "Cars" },
+  { image: "/lotd-image.jpg", title: "Yacht Party", category: "Travel" },
+  { image: "/showcase/strip.jpg", title: "Making It Rain", category: "Nightlife" },
+  { image: "/showcase/jet.jpg", title: "Wheels Up", category: "Travel" },
+  { image: "/showcase/rolls.jpg", title: "Briefcase Full", category: "Lifestyle" },
+  { image: "/showcase/penthouse.jpg", title: "Money Bath", category: "Lifestyle" },
+  { image: "/showcase/scarface.jpg", title: "Count It Up", category: "Crime" },
+  { image: "/showcase/redcarpet.jpg", title: "Hollywood Night", category: "Celebrity" },
+  { image: "/showcase/lambo2.jpg", title: "Supercar Life", category: "Cars" },
+];
+
 export default function GalleryPage() {
-  const [filter, setFilter] = useState<string>("all");
-
-  const filtered =
-    filter === "all"
-      ? galleryItems
-      : galleryItems.filter((g) => g.sceneId === filter);
-
   return (
     <div className="min-h-screen" style={{ background: "var(--bg-primary)" }}>
       {/* Header */}
       <div
-        className="px-4 md:px-5 py-3 flex items-center justify-between sticky top-0 z-10"
+        className="px-4 md:px-6 py-3 flex items-center justify-between sticky top-0 z-10"
         style={{
-          borderBottom: "1px solid var(--border)",
-          background: "var(--bg-primary)",
-          backdropFilter: "blur(12px)",
+          background: "rgba(13,13,13,0.8)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
         <Link
           href="/"
-          className="flex items-center gap-2 no-underline transition-colors duration-150"
-          style={{ color: "var(--text-secondary)" }}
-          onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-primary)")}
-          onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")}
+          className="text-sm font-bold no-underline"
+          style={{ color: "var(--text-primary)" }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-          <span className="text-[13px] font-medium">Back</span>
+          LarpGPT
         </Link>
-        <h1 className="text-[16px] font-bold" style={{ color: "var(--text-primary)" }}>
-          🖼️ Larp Gallery
-        </h1>
-        <div className="w-[60px]" />
+        <nav className="flex items-center gap-5">
+          <Link
+            href="/"
+            className="text-[13px] no-underline transition-colors duration-150"
+            style={{ color: "var(--text-muted)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+          >
+            Home
+          </Link>
+          <span
+            className="text-[13px] font-medium"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Gallery
+          </span>
+        </nav>
       </div>
 
-      {/* Filters */}
-      <div
-        className="px-4 md:px-5 py-3 flex gap-2 overflow-x-auto sticky top-[49px] z-10"
-        style={{
-          background: "var(--bg-primary)",
-          borderBottom: "1px solid var(--border)",
-          msOverflowStyle: "none",
-          scrollbarWidth: "none",
-        }}
-      >
-        <button
-          onClick={() => setFilter("all")}
-          className="py-1.5 px-4 rounded-full text-[12px] font-medium cursor-pointer transition-all duration-150 whitespace-nowrap border-none shrink-0"
-          style={{
-            background: filter === "all" ? "var(--green)" : "var(--bg-secondary)",
-            color: filter === "all" ? "white" : "var(--text-secondary)",
-          }}
-        >
-          All Larps
-        </button>
-        {scenes.map((scene) => (
-          <button
-            key={scene.id}
-            onClick={() => setFilter(scene.id)}
-            className="py-1.5 px-4 rounded-full text-[12px] font-medium cursor-pointer transition-all duration-150 whitespace-nowrap border-none shrink-0"
+      {/* Grid — 4 columns */}
+      <div className="px-3 md:px-5 py-4 md:py-6 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-[1400px] mx-auto">
+        {galleryItems.map((item, i) => (
+          <div
+            key={i}
+            className="relative rounded-xl overflow-hidden cursor-pointer group animate-fadeIn"
             style={{
-              background: filter === scene.id ? "var(--green)" : "var(--bg-secondary)",
-              color: filter === scene.id ? "white" : "var(--text-secondary)",
+              aspectRatio: "1",
+              animationDelay: `${i * 40}ms`,
+              animationFillMode: "backwards",
             }}
           >
-            {scene.emoji} {scene.title}
-          </button>
-        ))}
-      </div>
+            {/* Image */}
+            <img
+              src={item.image}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
+              style={{}}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            />
 
-      {/* Grid */}
-      <div className="px-4 md:px-5 py-5 md:py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1200px] mx-auto">
-        {filtered.map((item, i) => {
-          const scene = scenes.find((s) => s.id === item.sceneId)!;
-          return (
+            {/* Bottom gradient overlay */}
             <div
-              key={item.id}
-              className="rounded-xl overflow-hidden transition-all duration-200 animate-fadeIn"
+              className="absolute inset-0 pointer-events-none"
               style={{
-                background: "var(--bg-secondary)",
-                border: "1px solid var(--border)",
-                animationDelay: `${i * 60}ms`,
-                animationFillMode: "backwards",
+                background:
+                  "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%)",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--green)";
-                e.currentTarget.style.boxShadow = "0 0 24px var(--green-glow)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              {/* Placeholder image */}
-              <div
-                className="w-full flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
-                  aspectRatio: "1",
-                }}
-              >
-                <div className="text-center">
-                  <div className="text-5xl md:text-6xl mb-3">{scene.emoji}</div>
-                  <div className="text-[13px] font-semibold" style={{ color: "var(--gold)" }}>
-                    {scene.title}
-                  </div>
-                </div>
-              </div>
+            />
 
-              {/* Info */}
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div
-                    className="w-6 h-6 rounded-full flex items-center justify-center text-[10px]"
-                    style={{ background: "linear-gradient(135deg, var(--green), #0ea5e9)" }}
-                  >
-                    🎭
-                  </div>
-                  <span className="text-[13px] font-semibold" style={{ color: "var(--text-primary)" }}>
-                    {item.persona}
-                  </span>
-                  <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>
-                    {item.handle}
-                  </span>
-                </div>
-                <p className="text-[13px] leading-relaxed mb-3" style={{ color: "var(--text-secondary)" }}>
-                  {item.caption}
-                </p>
-                <div className="flex gap-4 text-[11px]" style={{ color: "var(--text-muted)" }}>
-                  <span>
-                    ❤️ <span style={{ color: "var(--gold)", fontWeight: 600 }}>{item.likes}</span>
-                  </span>
-                  <span>
-                    💬 <span style={{ color: "var(--gold)", fontWeight: 600 }}>{item.comments}</span>
-                  </span>
-                </div>
+            {/* Title + category */}
+            <div className="absolute bottom-0 left-0 right-0 px-3 pb-3 z-10">
+              <div
+                className="text-[13px] md:text-[14px] font-bold"
+                style={{ color: "white" }}
+              >
+                {item.title}
+              </div>
+              <div
+                className="text-[11px]"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                {item.category}
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );
