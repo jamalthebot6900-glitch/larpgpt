@@ -6,44 +6,44 @@ interface ExamplePromptsProps {
 
 const examples = [
   {
-    label: "Yacht Party",
+    label: "Making It Rain",
     prompt:
-      "This person is lounging shirtless on the aft deck of a 60-meter superyacht surrounded by models in bikinis, popping bottles of Dom Perignon, stacks of cash on the table, Mediterranean sea in background. Paparazzi candid shot.",
+      "is in a strip club VIP booth throwing hundreds in the air, bottles everywhere, neon purple lighting, cash scattered all over the floor, women dancing around him",
   },
   {
-    label: "Lambo Mansion",
+    label: "Yacht & Models",
     prompt:
-      "This person is standing confidently next to a matte black Lamborghini Urus in the driveway of a $15 million mansion, dripping in gold chains and a Rolex, palm trees and fountain behind them. Golden hour warm lighting.",
+      "is on a mega yacht surrounded by women in bikinis, popping Dom Perignon with the spray going everywhere, Mediterranean sea, golden hour, dripping in gold chains",
   },
   {
-    label: "Strip Club VIP",
+    label: "Scarface Desk",
     prompt:
-      "This person is sitting in a VIP booth at an upscale strip club throwing stacks of hundred dollar bills in the air, neon purple and pink lighting, bottles of champagne everywhere, bills scattered all over the floor and table.",
+      "is sitting behind a massive desk covered in mountains of cash, counting money with a money counter, cigar in mouth, dim moody lighting, whiskey on the desk, like a scene from Scarface",
   },
   {
-    label: "Bank Heist",
+    label: "Lambo Cash Run",
     prompt:
-      "This person is walking out of a bank vault carrying duffel bags overflowing with cash, wearing a tailored suit and dark sunglasses, money scattered on the floor, dramatic cinematic lighting like a movie scene.",
+      "is leaning on a Lamborghini Aventador with the trunk open overflowing with stacks of cash, wearing all designer, gas station at night, neon lights reflecting off the car",
   },
   {
-    label: "Ice'd Out",
+    label: "Penthouse Hot Tub",
     prompt:
-      "This person is sitting in the back of a Rolls Royce Phantom, covered in diamond chains, diamond encrusted watch, diamond grillz, holding a briefcase full of cash, natural daylight streaming through tinted windows.",
+      "is in a penthouse rooftop hot tub with two women, champagne bottles floating, city skyline lit up at night behind, steam rising, cash on the edge of the tub",
   },
   {
-    label: "Drug Lord",
+    label: "Casino High Roller",
     prompt:
-      "This person is sitting behind a massive desk in a dark office, mountains of cash stacked on the desk, counting money with a money counter machine, cigar in mouth, dim moody lighting like a scene from Scarface.",
+      "is at a high stakes poker table with massive stacks of chips and cash piled high, cigar smoke in the air, whiskey neat, dark private casino room, cocky smirk",
   },
   {
-    label: "Private Jet",
+    label: "Ice'd Out Rolls",
     prompt:
-      "This person is relaxing inside a luxurious private jet cabin, cream leather seats, two models beside them, champagne in hand, stacks of cash on the table, window showing clouds and sunset. Designer clothes and jewelry.",
+      "is in the back of a Rolls Royce Phantom covered in diamond chains and a diamond encrusted watch, holding a briefcase full of cash, starlight ceiling glowing, city at night",
   },
   {
-    label: "Penthouse Flex",
+    label: "Beach Club Chaos",
     prompt:
-      "This person is standing by floor-to-ceiling windows of a luxury penthouse on the 73rd floor, city skyline at night, wearing an open bathrobe with gold chains visible, cash spread across the bed behind them.",
+      "is at an Ibiza beach club on a VIP daybed surrounded by women in bikinis, bottles of Ace of Spades everywhere, pool party going crazy in the background, Mediterranean sun",
   },
 ];
 
