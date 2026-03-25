@@ -1,22 +1,12 @@
 const FAL_KEY = process.env.FAL_KEY;
 
 const REALISM_PREFIX =
-  "Using this exact person's face with perfect identity preservation. " +
-  "Match their gender, ethnicity, skin tone, facial structure, and appearance precisely. " +
-  "The face must look exactly like the reference — same bone structure, same features, same person. " +
-  "Create an ultra-photorealistic photograph that looks like it was taken from someone's Instagram or Twitter feed: ";
+  "Instagram photo that looks 100% real: This exact person ";
 
 const REALISM_SUFFIX =
-  " Technical requirements: Shot on a Canon EOS R5 with an 85mm f/1.4 lens at ISO 200, " +
-  "natural ambient lighting, realistic color grading like an iPhone or DSLR photo posted on social media. " +
-  "Include: natural skin pores and texture, subsurface skin scattering, micro-imperfections (moles, freckles, stubble), " +
-  "real volumetric shadows, natural hair strands, fabric wrinkles and texture detail, " +
-  "realistic depth of field with slight bokeh, natural lens compression, " +
-  "authentic body proportions matching the person's build. " +
-  "The lighting must match the environment — no studio lighting in outdoor scenes. " +
-  "This must be completely indistinguishable from a real candid photo. " +
-  "Absolutely no: airbrushing, plastic/waxy skin, uncanny valley, cartoonish features, " +
-  "over-saturated colors, AI glow, symmetrical perfection, or any tell-tale signs of AI generation.";
+  " This photo was taken on an iPhone 15 Pro and posted to Instagram. " +
+  "It must look completely real — natural skin, real shadows, no AI artifacts. " +
+  "Natural lighting that matches the environment.";
 
 /**
  * Build a full photorealistic prompt from a scene description.
