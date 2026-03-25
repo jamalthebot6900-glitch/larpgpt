@@ -19,9 +19,10 @@ interface Message {
 interface ChatAreaProps {
   selectedScene: Scene | null;
   onBack: () => void;
+  initialPrompt?: string | null;
 }
 
-export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
+export default function ChatArea({ selectedScene, onBack, initialPrompt }: ChatAreaProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showUpload, setShowUpload] = useState(false);
   const [generating, setGenerating] = useState(false);
@@ -41,10 +42,18 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
       return;
     }
 
+    // Use initialPrompt if provided (from example or custom text on welcome screen)
+    const promptText = initialPrompt || selectedScene.prompt;
+    const displayText = initialPrompt
+      ? initialPrompt.slice(0, 80) + (initialPrompt.length > 80 ? "..." : "")
+      : `I want the ${selectedScene.emoji} ${selectedScene.title} larp`;
+
+    setCustomPrompt(promptText);
+
     setMessages([
       {
         role: "user",
-        text: `I want the ${selectedScene.emoji} ${selectedScene.title} larp`,
+        text: displayText,
       },
     ]);
 
@@ -53,14 +62,14 @@ export default function ChatArea({ selectedScene, onBack }: ChatAreaProps) {
         ...prev,
         {
           role: "bot",
-          text: `Perfect choice. The ${selectedScene.title} scene is one of our most convincing larps. 🔥\n\nI'll need a selfie to put you in the scene. The AI will handle the rest — lighting, angle, that "I definitely own this" energy.\n\nReady to upload your photo?`,
+          text: `Perfect. I'll make this look real as hell. 🔥\n\nJust need your photo — attach it below or click the 📎 button. The AI handles the rest.`,
           showUpload: true,
         },
       ]);
-    }, 800);
+    }, 600);
 
     return () => clearTimeout(timer);
-  }, [selectedScene]);
+  }, [selectedScene, initialPrompt]);
 
   useEffect(() => {
     if (scrollRef.current) {
