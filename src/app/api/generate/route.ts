@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildPrompt, generateWithFace, generateTextOnly } from "@/lib/fal";
+import { getServiceClient } from "@/lib/supabase";
 import { scenes } from "@/lib/scenes";
 
 export const maxDuration = 120;
@@ -15,7 +16,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Resolve the scene description — preset or custom
     let sceneDescription: string;
     let scene = null;
 
@@ -37,21 +37,30 @@ export async function POST(req: NextRequest) {
         imageUrl: null,
         demo: true,
         scene,
-        message: "Demo mode — FAL_KEY not set. Image generation is disabled.",
+        message: "Demo mode — FAL_KEY not set.",
       });
     }
 
-    // Build the full photorealistic prompt
     const fullPrompt = buildPrompt(sceneDescription);
 
     let imageUrl: string;
 
     if (selfieBase64) {
-      // Face reference provided → use edit endpoint for natural integration
       imageUrl = await generateWithFace(fullPrompt, selfieBase64);
     } else {
-      // No face → text-only generation
       imageUrl = await generateTextOnly(fullPrompt);
+    }
+
+    // Save to Supabase
+    try {
+      const sb = getServiceClient();
+      await sb.from("larps").insert({
+        image_url: imageUrl,
+        scene: sceneDescription.slice(0, 200),
+      });
+    } catch {
+      // Don't fail the request if DB save fails
+      console.error("Failed to save larp to DB");
     }
 
     return NextResponse.json({

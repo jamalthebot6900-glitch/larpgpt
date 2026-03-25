@@ -1,69 +1,93 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const galleryItems = [
-  { image: "/showcase/gas_urus.jpg", title: "Gas Station Urus", category: "Cars", handle: "@ethanprosper" },
-  { image: "/showcase/dubai_pool.jpg", title: "Dubai Infinity Pool", category: "Travel", handle: "@Megga" },
-  { image: "/showcase/maybach_cigar.jpg", title: "Maybach Cigar", category: "Night", handle: "@flipski77" },
-  { image: "/showcase/helicopter.jpg", title: "Helicopter Arrival", category: "Travel", handle: "@BenArmstrongsX" },
-  { image: "/showcase/bank_vault.jpg", title: "Bank Vault", category: "Lifestyle", handle: "@blknoiz06" },
-  { image: "/showcase/ferrari_rain.jpg", title: "Ferrari Rain", category: "Cars", handle: "@toly" },
-  { image: "/showcase/mansion_pool.jpg", title: "Mansion Pool Night", category: "Night", handle: "@ethanprosper" },
-  { image: "/showcase/gucci_shop.jpg", title: "Gucci Shopping Spree", category: "Lifestyle", handle: "@Megga" },
-  { image: "/showcase/club_vip.jpg", title: "VIP Club Life", category: "Night", handle: "@VitalikButerin" },
-  { image: "/showcase/cybertruck_cash.jpg", title: "Cybertruck Cash", category: "Cars", handle: "@saylor" },
-  { image: "/showcase/dubai_penthouse.jpg", title: "Dubai Penthouse", category: "Travel", handle: "@alxcooks" },
-  { image: "/showcase/rolls.jpg", title: "Rolls Royce Drip", category: "Cars", handle: "@pr6spr" },
-  { image: "/showcase/redcarpet.jpg", title: "Red Carpet", category: "Celebrity", handle: "@Megga" },
-  { image: "/showcase/penthouse.jpg", title: "Penthouse Cash", category: "Lifestyle", handle: "@flipski77" },
-  { image: "/showcase/scarface.jpg", title: "Scarface Desk", category: "Night", handle: "@BenArmstrongsX" },
-  { image: "/showcase/yacht2.jpg", title: "Yacht Champagne", category: "Travel", handle: "@blknoiz06" },
-  { image: "/showcase/lambo2.jpg", title: "Monaco Lambo", category: "Cars", handle: "@toly" },
-  { image: "/showcase/yacht3.jpg", title: "Yacht Party", category: "Travel", handle: "@CookerFlips" },
-  { image: "/showcase/strip2.jpg", title: "Making It Rain", category: "Night", handle: "@elonmusk" },
-  { image: "/showcase/mcdonalds.jpg", title: "McDonalds Arc", category: "Down Bad", handle: "@elonmusk" },
-  { image: "/showcase/rekt.jpg", title: "Trading Rekt", category: "Down Bad", handle: "@elonmusk" },
-  { image: "/showcase/yacht.jpg", title: "Mediterranean Life", category: "Travel", handle: "@elonmusk" },
-  { image: "/showcase/ibiza_beach.jpg", title: "Ibiza Beach Club", category: "Night", handle: "@ethanprosper" },
-  { image: "/showcase/poker_table.jpg", title: "High Roller Poker", category: "Night", handle: "@Megga" },
-  { image: "/showcase/tulum_cabana.jpg", title: "Tulum Cabana", category: "Travel", handle: "@flipski77" },
-  { image: "/showcase/dubai_helipad.jpg", title: "Dubai Helipad", category: "Travel", handle: "@BenArmstrongsX" },
-  { image: "/showcase/vegas_vip.jpg", title: "Vegas VIP", category: "Night", handle: "@blknoiz06" },
-  { image: "/showcase/lambo_pch.jpg", title: "Lambo PCH", category: "Cars", handle: "@toly" },
-  { image: "/showcase/cigar_club.jpg", title: "Cigar Club", category: "Night", handle: "@VitalikButerin" },
-  { image: "/showcase/monaco_yacht.jpg", title: "Monaco Grand Prix Yacht", category: "Travel", handle: "@saylor" },
-  { image: "/showcase/first_class.jpg", title: "First Class Emirates", category: "Travel", handle: "@alxcooks" },
-  { image: "/showcase/vegas_hottub.jpg", title: "Vegas Hot Tub", category: "Night", handle: "@alxcooks" },
-  { image: "/showcase/nba_courtside.jpg", title: "NBA Courtside", category: "Lifestyle", handle: "@ethanprosper" },
-  { image: "/showcase/sprinter_van.jpg", title: "Luxury Sprinter", category: "Night", handle: "@Megga" },
-  { image: "/showcase/miami_rooftop.jpg", title: "Miami Rooftop", category: "Travel", handle: "@flipski77" },
-  { image: "/showcase/mykonos_walk.jpg", title: "Mykonos Walk", category: "Travel", handle: "@BenArmstrongsX" },
-  { image: "/showcase/cash_bed.jpg", title: "Cash Bed", category: "Lifestyle", handle: "@blknoiz06" },
-  { image: "/showcase/hookah_vip.jpg", title: "Hookah Lounge", category: "Night", handle: "@VitalikButerin" },
-  { image: "/showcase/bugatti_garage.jpg", title: "Bugatti Garage", category: "Cars", handle: "@saylor" },
-  { image: "/showcase/maldives_boat.jpg", title: "Maldives Speedboat", category: "Travel", handle: "@alxcooks" },
-  { image: "/showcase/michelin_dinner.jpg", title: "Michelin Dinner", category: "Lifestyle", handle: "@pr6spr" },
-  { image: "/showcase/tokyo_neon.jpg", title: "Tokyo Neon", category: "Travel", handle: "@elonmusk" },
-  { image: "/showcase/counting_cash.jpg", title: "Counting Cash", category: "Lifestyle", handle: "@VitalikButerin" },
-  { image: "/showcase/gucci_walk.jpg", title: "Gucci Walk", category: "Lifestyle", handle: "@alxcooks" },
-  { image: "/showcase/miami_hottub.jpg", title: "Miami Hot Tub", category: "Night", handle: "@BenArmstrongsX" },
-  { image: "/showcase/gwagon_gas.jpg", title: "G-Wagon Gas Station", category: "Cars", handle: "@saylor" },
-  { image: "/showcase/bali_pool.jpg", title: "Bali Villa Pool", category: "Travel", handle: "@Megga" },
-  { image: "/showcase/lv_nyc.jpg", title: "LV Fifth Avenue", category: "Lifestyle", handle: "@toly" },
-  { image: "/showcase/blackjack.jpg", title: "High Stakes Blackjack", category: "Night", handle: "@flipski77" },
-  { image: "/showcase/jetski.jpg", title: "Maldives Jet Ski", category: "Travel", handle: "@ethanprosper" },
-  { image: "/showcase/maybach_night.jpg", title: "Maybach Night", category: "Cars", handle: "@blknoiz06" },
-  { image: "/showcase/monaco_balcony.jpg", title: "Monaco Balcony", category: "Travel", handle: "@elonmusk" },
-  { image: "/showcase/dubai_pool_party.jpg", title: "Dubai Pool Party", category: "Night", handle: "@VitalikButerin" },
-  { image: "/showcase/barber_crypto.jpg", title: "Barber Crypto", category: "Lifestyle", handle: "@saylor" },
-  { image: "/showcase/jet_redcarpet.jpg", title: "Jet Red Carpet", category: "Travel", handle: "@blknoiz06" },
-  { image: "/showcase/mclaren_night.jpg", title: "McLaren Night", category: "Cars", handle: "@flipski77" },
-  { image: "/showcase/strip_rain.jpg", title: "Strip Rain", category: "Night", handle: "@toly" },
-  { image: "/showcase/urus_sunset.jpg", title: "Urus Sunset", category: "Cars", handle: "@ethanprosper" },
+const staticItems = [
+  { image: "/showcase/gas_urus.jpg" },
+  { image: "/showcase/dubai_pool.jpg" },
+  { image: "/showcase/maybach_cigar.jpg" },
+  { image: "/showcase/helicopter.jpg" },
+  { image: "/showcase/bank_vault.jpg" },
+  { image: "/showcase/ferrari_rain.jpg" },
+  { image: "/showcase/mansion_pool.jpg" },
+  { image: "/showcase/gucci_shop.jpg" },
+  { image: "/showcase/club_vip.jpg" },
+  { image: "/showcase/cybertruck_cash.jpg" },
+  { image: "/showcase/dubai_penthouse.jpg" },
+  { image: "/showcase/rolls.jpg" },
+  { image: "/showcase/redcarpet.jpg" },
+  { image: "/showcase/penthouse.jpg" },
+  { image: "/showcase/scarface.jpg" },
+  { image: "/showcase/yacht2.jpg" },
+  { image: "/showcase/lambo2.jpg" },
+  { image: "/showcase/yacht3.jpg" },
+  { image: "/showcase/strip2.jpg" },
+  { image: "/showcase/mcdonalds.jpg" },
+  { image: "/showcase/rekt.jpg" },
+  { image: "/showcase/yacht.jpg" },
+  { image: "/showcase/ibiza_beach.jpg" },
+  { image: "/showcase/poker_table.jpg" },
+  { image: "/showcase/tulum_cabana.jpg" },
+  { image: "/showcase/dubai_helipad.jpg" },
+  { image: "/showcase/vegas_vip.jpg" },
+  { image: "/showcase/lambo_pch.jpg" },
+  { image: "/showcase/cigar_club.jpg" },
+  { image: "/showcase/monaco_yacht.jpg" },
+  { image: "/showcase/first_class.jpg" },
+  { image: "/showcase/vegas_hottub.jpg" },
+  { image: "/showcase/nba_courtside.jpg" },
+  { image: "/showcase/sprinter_van.jpg" },
+  { image: "/showcase/miami_rooftop.jpg" },
+  { image: "/showcase/mykonos_walk.jpg" },
+  { image: "/showcase/cash_bed.jpg" },
+  { image: "/showcase/hookah_vip.jpg" },
+  { image: "/showcase/bugatti_garage.jpg" },
+  { image: "/showcase/maldives_boat.jpg" },
+  { image: "/showcase/michelin_dinner.jpg" },
+  { image: "/showcase/tokyo_neon.jpg" },
+  { image: "/showcase/orangie_club.jpg" },
+  { image: "/showcase/counting_cash.jpg" },
+  { image: "/showcase/gucci_walk.jpg" },
+  { image: "/showcase/miami_hottub.jpg" },
+  { image: "/showcase/gwagon_gas.jpg" },
+  { image: "/showcase/bali_pool.jpg" },
+  { image: "/showcase/lv_nyc.jpg" },
+  { image: "/showcase/blackjack.jpg" },
+  { image: "/showcase/jetski.jpg" },
+  { image: "/showcase/maybach_night.jpg" },
+  { image: "/showcase/monaco_balcony.jpg" },
+  { image: "/showcase/dubai_pool_party.jpg" },
+  { image: "/showcase/barber_crypto.jpg" },
+  { image: "/showcase/jet_redcarpet.jpg" },
+  { image: "/showcase/mclaren_night.jpg" },
+  { image: "/showcase/strip_rain.jpg" },
+  { image: "/showcase/urus_sunset.jpg" },
 ];
 
+interface DbLarp {
+  id: string;
+  image_url: string;
+  scene: string;
+  handle: string;
+}
+
 export default function GalleryPage() {
+  const [dbLarps, setDbLarps] = useState<DbLarp[]>([]);
+
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((r) => r.json())
+      .then((d) => setDbLarps(d.larps || []))
+      .catch(() => {});
+  }, []);
+
+  // Combine: DB larps first (newest), then static
+  const allImages = [
+    ...dbLarps.map((l) => ({ image: l.image_url })),
+    ...staticItems,
+  ];
+
   return (
     <div className="min-h-screen" style={{ background: "var(--bg-primary)" }}>
       {/* Header */}
@@ -102,29 +126,25 @@ export default function GalleryPage() {
         </nav>
       </div>
 
-      {/* Grid — 4 columns */}
+      {/* Grid — 4 columns, just photos */}
       <div className="px-3 md:px-5 py-4 md:py-6 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-[1400px] mx-auto">
-        {galleryItems.map((item, i) => (
+        {allImages.map((item, i) => (
           <div
             key={i}
-            className="relative rounded-xl overflow-hidden cursor-pointer group animate-fadeIn"
+            className="relative rounded-xl overflow-hidden cursor-pointer animate-fadeIn"
             style={{
               aspectRatio: "1",
               animationDelay: `${i * 40}ms`,
               animationFillMode: "backwards",
             }}
           >
-            {/* Image */}
             <img
               src={item.image}
-              alt={item.title}
+              alt=""
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
-              style={{}}
               onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             />
-
-            
           </div>
         ))}
       </div>
