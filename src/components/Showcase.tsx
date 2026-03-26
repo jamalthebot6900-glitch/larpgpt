@@ -3,6 +3,11 @@
 import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
+  { image: "/showcase/rooftop_dubai.jpg" },
+  { image: "/showcase/supercar_garage.jpg" },
+  { image: "/showcase/emirates_first.jpg" },
+  { image: "/showcase/poker_vip.jpg" },
+  { image: "/showcase/maldives_villa.jpg" },
   { image: "/showcase/ibiza_beach.jpg" },
   { image: "/showcase/rolls.jpg" },
   { image: "/showcase/poker_table.jpg" },
