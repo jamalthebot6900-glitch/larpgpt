@@ -3,21 +3,14 @@
 import { useState, useEffect, useCallback } from "react";
 
 const showcaseItems = [
-  { image: "/showcase/rooftop_dubai.jpg" },
-  { image: "/showcase/supercar_garage.jpg" },
-  { image: "/showcase/emirates_first.jpg" },
-  { image: "/showcase/poker_vip.jpg" },
-  { image: "/showcase/maldives_villa.jpg" },
+  { image: "/showcase/gas_urus.jpg" },
   { image: "/showcase/ibiza_beach.jpg" },
   { image: "/showcase/rolls.jpg" },
   { image: "/showcase/poker_table.jpg" },
-  { image: "/showcase/gas_urus.jpg" },
   { image: "/showcase/tulum_cabana.jpg" },
-  { image: "/showcase/dubai_pool.jpg" },
   { image: "/showcase/dubai_helipad.jpg" },
   { image: "/showcase/vegas_vip.jpg" },
   { image: "/showcase/lambo_pch.jpg" },
-  { image: "/showcase/maybach_cigar.jpg" },
   { image: "/showcase/cigar_club.jpg" },
   { image: "/showcase/monaco_yacht.jpg" },
   { image: "/showcase/helicopter.jpg" },

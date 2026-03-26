@@ -4,14 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const staticItems = [
-  { image: "/showcase/rooftop_dubai.jpg" },
-  { image: "/showcase/supercar_garage.jpg" },
-  { image: "/showcase/emirates_first.jpg" },
-  { image: "/showcase/poker_vip.jpg" },
-  { image: "/showcase/maldives_villa.jpg" },
   { image: "/showcase/gas_urus.jpg" },
-  { image: "/showcase/dubai_pool.jpg" },
-  { image: "/showcase/maybach_cigar.jpg" },
   { image: "/showcase/helicopter.jpg" },
   { image: "/showcase/bank_vault.jpg" },
   { image: "/showcase/ferrari_rain.jpg" },

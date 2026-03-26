@@ -16,7 +16,7 @@ export const scenes: Scene[] = [
     title: "Lambo & Mansion",
     description: "Pull up to your $15M crib in a matte black Urus",
     prompt:
-      "A confident young man standing next to a matte black Lamborghini Urus in the driveway of a modern $15 million mansion with palm trees and a fountain, golden hour warm lighting, photorealistic, 8k, shot on Canon EOS R5, shallow depth of field",
+      "standing casually with one hand resting on the roof of a matte black Lamborghini Urus parked in the circular driveway of a sprawling modern mansion with floor-to-ceiling glass walls, mature palm trees lining the drive, a travertine stone fountain running in the background, golden hour sunlight casting long warm shadows across the pavement, their reflection visible in the car's glossy paint, wearing a fitted designer t-shirt and slim joggers with white sneakers, relaxed confident posture like they just got home",
     caption:
       "Just another Tuesday. Pulled the Urus out to grab groceries. The mansion's almost too big for one person tbh... almost. 🏠💰",
     hashtags: "#CryptoLife #LamboOrRamen #MadeIt #NeverSelling",
@@ -28,7 +28,7 @@ export const scenes: Scene[] = [
     title: "100x Trading Desk",
     description: "6 monitors, green candles, impossible PnL screenshots",
     prompt:
-      "A young man sitting at a professional trading desk with 6 curved monitors showing green candlestick charts and cryptocurrency prices, dark room lit by screen glow, energy drinks on desk, photorealistic, 8k, cinematic lighting",
+      "sitting in a high-back ergonomic chair at a professional trading desk with six 34-inch curved ultrawide monitors arranged in a 3x2 grid, all screens showing bright green candlestick charts with massive upward spikes, one monitor showing a crypto portfolio with a seven-figure USD balance, dark room illuminated only by the blue-green glow of the screens, two crumpled Monster Energy cans on the desk beside a mechanical keyboard with RGB lighting, the person leaning back slightly with arms behind their head in a power pose, screen reflections visible on their face, ambient blue light casting shadows across the room",
     caption:
       'Up $2.3M on $PEPE this week. Not even my biggest position. The screens don\'t lie (but I do). 📊🚀',
     hashtags: "#TraderLife #100x #DiamondHands #GreenCandles",
@@ -40,7 +40,7 @@ export const scenes: Scene[] = [
     title: "Private Jet Life",
     description: 'Wheels up. Champagne. "The grind pays off" caption ready',
     prompt:
-      "A young man relaxing inside a luxurious private jet cabin, cream leather seats, champagne glass in hand, window showing clouds and sunset, warm cabin lighting, photorealistic, 8k, shot on Sony A7R IV",
+      "relaxing in the cabin of a Gulfstream G650 private jet, sunk into a wide cream leather seat with gold stitching, holding a crystal champagne flute of Dom Pérignon with visible bubbles, a cashmere blanket draped over one leg, the oval window beside them showing a vivid orange and pink sunset above a sea of clouds at 40000 feet, warm recessed cabin lighting casting a soft glow, a MacBook Pro open on the walnut side table next to a leather passport holder, wearing a crisp white linen shirt with sleeves rolled up, looking relaxed and slightly smug",
     caption:
       'Wheels up to Dubai for a "meeting." The meeting is poolside at the Burj Al Arab. Business casual. 🥂✈️',
     hashtags: "#JetLife #Dubai #Hustle #TheGrindPaysOff",
@@ -52,7 +52,7 @@ export const scenes: Scene[] = [
     title: "Crypto Whale",
     description: "$47M wallet, diamond hands, WAGMI energy",
     prompt:
-      "A young man sitting in a minimalist modern office looking at a large screen showing a crypto wallet with $47 million balance, multiple Bitcoin and Ethereum logos visible, neon blue ambient lighting, photorealistic, 8k",
+      "sitting in a minimalist home office with polished concrete floors and a large abstract painting on the wall, facing a 32-inch Apple Studio Display showing a Phantom wallet interface with a balance of 47 million USD across multiple tokens including SOL ETH and BTC, the person has a subtle knowing smirk, wearing a plain black hoodie, a cold hardware wallet (Ledger Nano) sits on the white oak desk beside an espresso cup, soft diffused natural light from a large window to the left casting gentle shadows, the overall mood is quiet wealth and understated confidence",
     caption:
       "47 million in the wallet. Been holding since ETH was $8. They called me crazy. I call them poor. 🐋💎",
     hashtags: "#CryptoWhale #WAGMI #DiamondHands #Generational",
@@ -64,7 +64,7 @@ export const scenes: Scene[] = [
     title: "Yacht Party",
     description: "Mediterranean vibes, bottles, sunset, the whole flex",
     prompt:
-      "A young man standing on the deck of a 120 foot luxury superyacht in the Mediterranean sea, crystal blue water, sunset in background, champagne bottles on table, white and gold yacht interior visible, photorealistic, 8k, drone shot angle",
+      "standing on the teak aft deck of a 140-foot Benetti superyacht anchored in crystal turquoise Mediterranean water off the Amalfi coast, Italian cliffside villages visible in the far background, three bottles of Veuve Clicquot in a silver ice bucket on a white marble table, plush cream sunbed cushions nearby, the person wearing designer swim trunks and an open linen shirt billowing slightly in the sea breeze, warm golden hour light reflecting off the water surface creating shimmering caustic patterns on the hull, hair slightly tousled by wind, genuine relaxed expression",
     caption:
       'Just a casual Wednesday in the Mediterranean. The yacht\'s only 120ft, thinking of upgrading. 🌊🍾',
     hashtags: "#YachtLife #Mediterranean #Living #Blessed",
@@ -76,7 +76,7 @@ export const scenes: Scene[] = [
     title: "Watch Collection",
     description: "Patek, AP, Richard Mille — casual $500K on the wrist",
     prompt:
-      "Close-up of a young man's wrist wearing a Patek Philippe Nautilus watch, sitting in the back of a Rolls Royce, leather interior visible, natural daylight, photorealistic, 8k, macro photography style, shallow depth of field",
+      "a medium close-up shot from chest level, sitting in the rear passenger seat of a Rolls Royce Phantom with quilted dark navy leather interior and lambswool headliner visible, casually adjusting a Patek Philippe Nautilus 5711 on their left wrist — the watch dial catching a glint of natural daylight streaming through the tinted window, wearing a tailored charcoal cashmere sweater with the sleeve pushed up to show the watch, the person glancing down at the timepiece with a slight smile, shallow depth of field blurring the Rolls Royce Spirit of Ecstasy emblem embroidered in the headrest behind them",
     caption:
       "Can't decide between the Nautilus and the Royal Oak today. First world problems when your wrist game is $500K deep. ⌚💎",
     hashtags: "#WatchCollection #Patek #AP #WristGame",
@@ -88,7 +88,7 @@ export const scenes: Scene[] = [
     title: "Penthouse View",
     description: "Floor-to-ceiling glass, city skyline, you made it",
     prompt:
-      "A young man standing by floor-to-ceiling windows of a luxury penthouse apartment on the 73rd floor, panoramic city skyline at night with city lights, modern minimalist interior, coffee in hand, photorealistic, 8k, cinematic wide angle",
+      "standing barefoot on heated marble floors in a luxury penthouse apartment, leaning one shoulder against floor-to-ceiling glass windows that stretch 12 feet high, holding a ceramic mug of black coffee with steam visibly rising, panoramic nighttime city skyline behind them — thousands of twinkling lights from skyscrapers and streets below on the 73rd floor, the interior is modern minimalist with a long white Italian leather sectional sofa and a single large Basquiat painting on the far wall, recessed warm LED lighting in the ceiling casting a soft amber glow, wearing grey sweatpants and a plain white tee looking completely at home, their reflection ghosted in the window glass",
     caption:
       'Morning coffee hits different on floor 73. The city looks so small from up here. Literally and figuratively. ☕🏙️',
     hashtags: "#PenthouseLife #ViewFromTheTop #MadeIt #CityViews",
@@ -100,7 +100,7 @@ export const scenes: Scene[] = [
     title: "Celebrity Status",
     description: "Red carpet, paparazzi, VIP everything",
     prompt:
-      "A young man walking the red carpet at a Hollywood premiere, wearing a tailored black suit, camera flashes from paparazzi, velvet rope barriers, photographers in background, photorealistic, 8k, editorial photography style",
+      "walking confidently down a red carpet at a Hollywood premiere event, wearing a perfectly tailored slim-fit black Tom Ford suit with a satin lapel, crisp white dress shirt unbuttoned at the collar with no tie, polished black Oxford shoes, multiple bright camera flashes from paparazzi creating starburst lens flares in the background, velvet rope barriers with gold stanchions on either side, blurred photographers with long telephoto lenses visible behind the ropes, a large illuminated movie poster display to the right, the red carpet has a slight sheen from the lights, the person mid-stride with a natural charismatic smile — not posed but caught in motion like a real paparazzi shot",
     caption:
       'Third red carpet this week. My publicist says I need to "be more exclusive." I say the people need me. 📸⭐',
     hashtags: "#Celebrity #RedCarpet #Famous #VIP",
