@@ -118,7 +118,7 @@ export default function Home() {
               𝕏
             </a>
             <a
-              href="https://pump.fun/"
+              href="https://pump.fun/coin/E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center py-1.5 px-3 rounded-lg no-underline transition-all duration-150 min-w-[40px]"
@@ -137,7 +137,7 @@ export default function Home() {
             </a>
             <button
               onClick={() => {
-                navigator.clipboard.writeText("CONTRACT_ADDRESS_HERE");
+                navigator.clipboard.writeText("E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump");
                 const btn = document.getElementById("ca-btn");
                 if (btn) { btn.textContent = "Copied!"; setTimeout(() => { btn.textContent = "CA"; }, 1500); }
               }}

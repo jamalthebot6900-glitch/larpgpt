@@ -109,7 +109,7 @@ export default function Sidebar({ isOpen, onClose, onNewChat }: SidebarProps) {
             𝕏
           </a>
           <a
-            href="https://pump.fun/"
+            href="https://pump.fun/coin/E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 py-2 rounded-lg text-[12px] font-semibold no-underline text-center transition-colors duration-150"
