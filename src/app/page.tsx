@@ -139,10 +139,10 @@ export default function Home() {
               onClick={() => {
                 navigator.clipboard.writeText("E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump");
                 const btn = document.getElementById("ca-btn");
-                if (btn) { btn.textContent = "Copied!"; setTimeout(() => { btn.textContent = "CA"; }, 1500); }
+                if (btn) { btn.textContent = "Copied!"; setTimeout(() => { btn.textContent = "E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump"; }, 1500); }
               }}
               id="ca-btn"
-              className="flex items-center justify-center py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer transition-all duration-150 min-w-[60px]"
+              className="flex items-center justify-center py-2 px-3 rounded-lg text-[11px] font-mono cursor-pointer transition-all duration-150"
               style={{
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border)",
@@ -157,7 +157,7 @@ export default function Home() {
                 e.currentTarget.style.color = "var(--text-secondary)";
               }}
             >
-              CA
+              E7F3RqwT5rsPURazpJ8JKXp5LKHmwJuUKWBLJcfLpump
             </button>
           </div>
 
